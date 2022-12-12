@@ -6,6 +6,8 @@ import { BsFillPlayCircleFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import { fetchLikeTrack } from '../../Api/putApi';
 import { setPlayer } from '../../helpers/functions/setPlayer';
+import DropdownDot from '../DropdownDot/DropdownDot';
+
 
 const Card = ({ data, size, img }) => {
     const dispatch = useDispatch();
@@ -48,8 +50,10 @@ const Card = ({ data, size, img }) => {
             }
             <button className='btn btnplay' onClick={() => setPlayer([data], dispatch, usersData)}><BsFillPlayCircleFill /></button>
             <button className='btn dot' onClick=""><BsThreeDots /></button>
+            <DropdownDot />
+
             <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt='img' />
-            
+
 
             <div className="card-text card-body">
                 <h5 className="card-title">{data.name}</h5>
