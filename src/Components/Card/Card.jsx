@@ -1,5 +1,5 @@
 import './Card.css';
-import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart, BsSuitHeartFill, BsThreeDots } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLikedTrack, setUserUnlikedTrack } from '../../redux/features/user/userSlice';
 import { BsFillPlayCircleFill } from "react-icons/bs";
@@ -47,8 +47,9 @@ const Card = ({ data, size, img }) => {
                 }</button> : ""
             }
             <button className='btn btnplay' onClick={() => setPlayer([data], dispatch, usersData)}><BsFillPlayCircleFill /></button>
-
+            <button className='btn dot' onClick=""><BsThreeDots /></button>
             <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt='img' />
+            
 
             <div className="card-text card-body">
                 <h5 className="card-title">{data.name}</h5>

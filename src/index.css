@@ -126,3 +126,10 @@ body {
         text-decoration: none;
         padding: 1px 24px !important;
 }
+.dot{
+        transform: translateY(30px);
+        
+    
+        color: white !important;
+        font-size: 5rem;
+}
