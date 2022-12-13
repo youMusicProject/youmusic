@@ -18,12 +18,13 @@ export const functionRegister = async (e, dispatch) => {
             firstname: e.target.firstname.value,
             lastname: e.target.lastname.value,
             email: e.target.email.value,
-            password: e.target.password.value
+            password: e.target.password.value,
+            profilePicture:''
         },
         myplaylists:[],
         liked_tracks:[],
         liked_album:[],
-        profilePicture:''
+        
     }
     await fetchPostUser(new_user, dispatch);
 }

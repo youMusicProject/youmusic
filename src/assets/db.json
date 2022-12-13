@@ -2,6 +2,7 @@
   "playlists": [
     {
       "id": 1,
+      "userId": "admin",
       "name": "Road trip! All the masters I need!",
       "isFollowed": true,
       "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625060/tracks-thumbnails-dev/car_yx6ld1.jpg",
@@ -31,6 +32,7 @@
     },
     {
       "id": 2,
+      "userId": "admin",
       "name": "Motorcycle Mama!",
       "isFollowed": true,
       "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625058/tracks-thumbnails-dev/driving_g56eyw.jpg",

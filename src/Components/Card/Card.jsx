@@ -48,12 +48,11 @@ const Card = ({ data, size, img }) => {
                     usersData.userLogged.liked_tracks.find((like) => like.id === data.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
                 }</button> : ""
             }
+            
             <button className='btn btnplay' onClick={() => setPlayer([data], dispatch, usersData)}><BsFillPlayCircleFill /></button>
-            <button className='btn dot' onClick=""><BsThreeDots /></button>
             <DropdownDot />
-
             <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt='img' />
-
+            
 
             <div className="card-text card-body">
                 <h5 className="card-title">{data.name}</h5>
