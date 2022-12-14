@@ -4,6 +4,7 @@ import { ArtistPage } from '../pages/ArtistPage'
 import { ExplorePage } from '../pages/ExplorePage'
 import GenrePage from '../pages/GenrePage'
 import HomePage from '../pages/HomePage'
+import { Playlist } from '../pages/Playlist'
 import { PlaylistPage } from '../pages/PlaylistPage'
 import { ProfilePage } from '../pages/ProfilePage'
 import SongPage from '../pages/SongPage'
@@ -25,6 +26,7 @@ const AppRouter = () => {
 
 
                 <Route path='/profile' element={<PrivateRoutes><ProfilePage /></PrivateRoutes>} />
+                <Route path='/playlist' element={<PrivateRoutes><Playlist /></PrivateRoutes>} />
             </Routes>
         </>
     )

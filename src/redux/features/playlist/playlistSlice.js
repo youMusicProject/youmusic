@@ -8,10 +8,14 @@ export const playlistSlice = createSlice({
     reducers: {
         setPlaylistsList: (state, action) => {
             state.list = action.payload;
+        },
+        addPlaylist: (state, action) => {
+            console.log(action.payload);
+            state.list = [...state.list, action.payload];
         }
     },
 });
 
-export const { setPlaylistsList } = playlistSlice.actions;
+export const { setPlaylistsList, addPlaylist } = playlistSlice.actions;
 
 export default playlistSlice.reducer;

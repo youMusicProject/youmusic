@@ -7,6 +7,8 @@ import Slider from '../Components/Slider/Slider';
 import { TopInfoArtist } from '../Components/TopInfo/TopInfoArtist/TopInfoArtist';
 import { setPlayer } from '../helpers/functions/setPlayer';
 import { v4 as uuidv4 } from 'uuid';
+import { Button } from 'react-bootstrap';
+import { TbPlaylistAdd } from "react-icons/tb";
 
 export const ArtistPage = () => {
     const { id } = useParams();
@@ -23,7 +25,7 @@ export const ArtistPage = () => {
 
     return (
         <>
-            <TopInfoArtist data={artist} arraySongs={tracksArtist}/>
+            <TopInfoArtist data={artist} arraySongs={tracksArtist} />
 
             <div className='container mb-4'>
                 <table className="table">
@@ -118,7 +120,7 @@ export const ArtistPage = () => {
                 listGenreArtist.map((e) => {
                     if (e.length > 0) {
                         const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
-                        
+
                         return (
                             <div key={uuidv4()} className="container mt-2 mb-4">
                                 <Slider
@@ -155,6 +157,6 @@ export const ArtistPage = () => {
                     }
                 })
             }
-            </>
-            )
+        </>
+    )
 }

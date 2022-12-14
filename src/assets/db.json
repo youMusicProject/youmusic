@@ -6,7 +6,7 @@
       "name": "Road trip! All the masters I need!",
       "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625060/tracks-thumbnails-dev/car_yx6ld1.jpg",
       "description": "Get your mic on with this beats. You are going to sing all the way down",
-      "publicAccessible": "public",
+      "publicAccessible": true,
       "tracks": [
         {
           "id": 1,
@@ -33,7 +33,7 @@
       "name": "Motorcycle Mama!",
       "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625058/tracks-thumbnails-dev/driving_g56eyw.jpg",
       "description": "Take it easy on the wheels with this hits",
-      "publicAccessible": "public",
+      "publicAccessible": true,
       "tracks": [
         {
           "id": 2,
@@ -44,6 +44,26 @@
           "genre": "poprock"
         }
       ],
+      "primaryColor": "#fbdc00"
+    },
+    {
+      "id": "c0954219-125b-4c8c-9d89-4e25c826d8e2",
+      "userId": "46ab6f11-f764-44c1-8e3c-5595c6cf1f6b",
+      "name": "Esta es mi nueva playlist",
+      "thumbnail": "https://www.shutterstock.com/image-vector/playlist-neon-sign-vector-music-260nw-1795845130.jpg",
+      "description": "Estoy creando mi nueva PL que ilu",
+      "publicAccessible": true,
+      "tracks": [],
+      "primaryColor": "#fbdc00"
+    },
+    {
+      "id": "d38c3c6d-ef3b-4df1-812b-f468f832f3ac",
+      "userId": "46ab6f11-f764-44c1-8e3c-5595c6cf1f6b",
+      "name": "Esta es mi nueva playlist",
+      "thumbnail": "https://www.shutterstock.com/image-vector/playlist-neon-sign-vector-music-260nw-1795845130.jpg",
+      "description": "Estoy creando mi nueva PL que ilu",
+      "publicAccessible": true,
+      "tracks": [],
       "primaryColor": "#fbdc00"
     }
   ],
@@ -560,17 +580,28 @@
             }
           ],
           "primaryColor": "#fbdc00"
+        },
+        {
+          "id": 2,
+          "userId": "admin",
+          "name": "Motorcycle Mama!",
+          "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625058/tracks-thumbnails-dev/driving_g56eyw.jpg",
+          "description": "Take it easy on the wheels with this hits",
+          "publicAccessible": "public",
+          "tracks": [
+            {
+              "id": 2,
+              "name": "Alone",
+              "artist": "Color Out",
+              "url": "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583929/tracks-dev/Color_Out_-_Alone_aw3gmk.mp3",
+              "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/alone_rfib7a.jpg",
+              "genre": "poprock"
+            }
+          ],
+          "primaryColor": "#fbdc00"
         }
       ],
       "liked_tracks": [
-        {
-          "id": 1,
-          "name": "Better of alone",
-          "artist": "Kim Cesarion",
-          "url": "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Rxbyn_-_better_off_alone_fvhwp8.mp3",
-          "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/better_off_alone_gfmcby.jpg",
-          "genre": "piano"
-        },
         {
           "id": 6,
           "name": "Tantalizing Youth",

@@ -10,6 +10,12 @@ export const fetchPostUser = async (newUser, dispatch) => {
     } catch (error) { console.log(error) }
 }
 
+export const fetchPostPlaylist = async (new_playlist) => {
+    try {
+        await axios.post('http://localhost:4000/playlists', new_playlist);
+    } catch (error) { console.log(error) }
+}
+
 export const functionRegister = async (e, dispatch) => {
     const new_user = {
         id: uuidv4(),

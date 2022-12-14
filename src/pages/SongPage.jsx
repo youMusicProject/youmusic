@@ -6,6 +6,10 @@ import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { BsFillPlayFill } from "react-icons/bs";
 import { setPlayer } from '../helpers/functions/setPlayer';
 import { breakpoints_small } from '../helpers/functions/breakpoint';
+import { TbPlaylistAdd } from "react-icons/tb";
+import { DropdownButton } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useEffect } from 'react';
 
 
 const SongPage = () => {
@@ -15,8 +19,16 @@ const SongPage = () => {
     const song = tracks.list.find((track) => track.id === parseInt(id));
     const dispatch = useDispatch();
     const genreSong = tracks.list.filter((track) => track.genre === song.genre);
-    const listSameGenre = genreSong.filter((track) => track.id !== song.id)
-
+    const listSameGenre = genreSong.filter((track) => track.id !== song.id);
+    
+    const playlist = useSelector(state => state.playlistSlice.list);
+    let playlist_accesible;
+    useEffect(() => {
+        if(usersData.userLogged) {
+            playlist_accesible = playlist.filter(e => e.userId === usersData.userLogged.id);
+        }
+        console.log(playlist_accesible);
+    }, [usersData.isLogged])
     return (
         <>
             <div className="mx-0 song">
@@ -25,7 +37,7 @@ const SongPage = () => {
                         <div className="card-body little-profile p-4">
                             <div className='text-center'>
                                 <div className="song">
-                                    {/* <img src={song.thumbnail} alt="user" /> */}
+                                    <img src={song.thumbnail} alt="user" />
                                 </div>
                                 <h3 className="m-b-0">{song.name}</h3>
                                 <p>{song.artist}</p>
@@ -53,6 +65,7 @@ const SongPage = () => {
                             <th scope="col">Title</th>
                             <th scope="col">Artist</th>
                             <th scope="col">Genre</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +74,24 @@ const SongPage = () => {
                             <td>{song.name}</td>
                             <td>{song.artist}</td>
                             <td>{song.genre}</td>
+                            <td>
+                                <DropdownButton
+                                    className='my-dropdown-toggle'
+                                    drop=''
+                                    variant=""
+                                    title=<TbPlaylistAdd className='icon color-purple' />
+                                >
+                                    {// no funciona creo que tiene que ver con el playlist accesible al hacer el map,
+                                    // siguiente paso mostrar las playlist que puedes añadirle y al hacer click añadirla a la bd
+                                        usersData.isLogged ?? playlist_accesible ? playlist_accesible.map((e, i) => {
+                                            return (
+                                                <Dropdown.Item eventKey={i}>hola</Dropdown.Item>
+                                            )
+                                        }):<Dropdown.Item eventKey="2">You should to log in!</Dropdown.Item>
+                                    }
 
+                                </DropdownButton>
+                            </td>
                         </tr>
 
                     </tbody>

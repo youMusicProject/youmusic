@@ -59,8 +59,8 @@ const ModalAside = () => {
                     </div>
                     <div className="">
                         <ul className="sidebar-nav2">
-                            <li><Link to='/'><BsMusicNoteList className='me-1' /> Playlist</Link></li>
-                            <li><Link to='/'><GiMedallist className='me-1' /> Artist?</Link></li>
+                            <li onClick={() => setShow(false)}><Link to='/playlist'><BsMusicNoteList className='me-1' /> Playlist</Link></li>
+                            <li onClick={() => setShow(false)}><Link to='/'><GiMedallist className='me-1' /> Artist?</Link></li>
                         </ul>
                     </div>
 
