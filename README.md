@@ -95,7 +95,7 @@ Put into practice all the previous knowledge learned in the master to develop a 
 ## Authors
 
 - [@lidiettes](https://github.com/lidiettes)
-- Juan Fco
+- [@juanfco86](https://github.com/juanfco86)
 - Juan Carlos 
 - Alvaro
 
