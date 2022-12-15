@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Slider from '../Components/Slider/Slider'
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -10,27 +10,32 @@ import { TbPlaylistAdd } from "react-icons/tb";
 import { DropdownButton } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const SongPage = () => {
     const { id } = useParams();
     const tracks = useSelector(state => state.trackSlice);
     const usersData = useSelector(state => state.userSlice);
-    const song = tracks.list.find((track) => track.id === parseInt(id));
+
+    const [song, setSong] = useState(tracks.list.find((track) => track.id === parseInt(id)))
+    // const [genreSong, setGenreSong] = useState(tracks.list.filter((track) => track.genre === song.genre))
+    // const [listSameGenre, setListSameGenre] = useState(genreSong.filter((track) => track.id !== song.id))
+
     const dispatch = useDispatch();
     const genreSong = tracks.list.filter((track) => track.genre === song.genre);
     const listSameGenre = genreSong.filter((track) => track.id !== song.id);
-    
+
     const playlist = useSelector(state => state.playlistSlice.list);
-    let playlist_accesible;
+    const [playlist_accesible, setPlaylist] = useState([]);
+
     useEffect(() => {
-        if(usersData.userLogged) {
-            playlist_accesible = playlist.filter(e => e.userId === usersData.userLogged.id);
-        }
-        console.log(playlist_accesible);
-    }, [usersData.isLogged])
+        if (usersData.isLogged) { setPlaylist(playlist.filter(e => e.userId === usersData.userLogged.id)); }
+    }, [usersData.isLogged, playlist])
+
     return (
         <>
+
             <div className="mx-0 song">
                 <div className="">
                     <div className="">
@@ -43,19 +48,17 @@ const SongPage = () => {
                                 <p>{song.artist}</p>
                             </div>
                             <div className='containerButton--songpage'>
-                                <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer([song], dispatch, usersData)} ><BsFillPlayFill /></button>
-                                {
-                                    usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button'>{
-                                        usersData.userLogged.liked_tracks.find((like) => like.id === song.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
-                                    }</button> : ""
-                                }
-                                {/* <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true"  > <BsSuitHeart /></button>
- */}                            </div>
+                            </div>
+                            <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer([song], dispatch, usersData)} ><BsFillPlayFill /></button>
+                            {
+                                usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button'>{
+                                    usersData.userLogged.liked_tracks.find((like) => like.id === song.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                                }</button> : ""
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div className='mx-2 mb-4'>
                 <table className="table">
@@ -82,12 +85,12 @@ const SongPage = () => {
                                     title=<TbPlaylistAdd className='icon color-purple' />
                                 >
                                     {// no funciona creo que tiene que ver con el playlist accesible al hacer el map,
-                                    // siguiente paso mostrar las playlist que puedes añadirle y al hacer click añadirla a la bd
+                                        // siguiente paso mostrar las playlist que puedes añadirle y al hacer click añadirla a la bd
                                         usersData.isLogged ?? playlist_accesible ? playlist_accesible.map((e, i) => {
                                             return (
                                                 <Dropdown.Item eventKey={i}>hola</Dropdown.Item>
                                             )
-                                        }):<Dropdown.Item eventKey="2">You should to log in!</Dropdown.Item>
+                                        }) : <Dropdown.Item eventKey="2">You should to log in!</Dropdown.Item>
                                     }
 
                                 </DropdownButton>

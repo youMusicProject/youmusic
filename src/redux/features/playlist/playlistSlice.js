@@ -10,7 +10,6 @@ export const playlistSlice = createSlice({
             state.list = action.payload;
         },
         addPlaylist: (state, action) => {
-            console.log(action.payload);
             state.list = [...state.list, action.payload];
         }
     },
