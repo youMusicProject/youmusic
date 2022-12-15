@@ -4,7 +4,7 @@ Put into practice all the previous knowledge learned in the master to develop a 
 
 ## General analysis
 
- -With YouMusic we have created a project made with React of an application to listen to music where with a player you can listen to songs, albums, create lists and save your favourites and listen to the best music wherever you want. 
+ -With YouMusic we have created a project made with React of an application to listen to music like SoundCloud or Spotify where with a player you can listen to songs, albums, create lists and save your favourites and listen to the best music wherever you want. You will also have a profile where you can edit all your data whenever you want.
  
  -This application has a minimal design with a very intuitive interface to make it very easy to use for any user. 
 
@@ -23,8 +23,6 @@ Put into practice all the previous knowledge learned in the master to develop a 
 - Private routes
 - UseParams, UseNavigate
 - Agile methodology with Click up
-
-
 
 ### Libraries
 
