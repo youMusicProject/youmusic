@@ -96,6 +96,6 @@ Put into practice all the previous knowledge learned in the master to develop a 
 
 - [@lidiettes](https://github.com/lidiettes)
 - [@juanfco86](https://github.com/juanfco86)
-- Juan Carlos 
+- [@jcmginer](https://github.com/jcmginer) 
 - Alvaro
 
