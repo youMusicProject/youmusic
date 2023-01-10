@@ -130,6 +130,39 @@
           "genre": "piano"
         }
       ]
+    },
+    {
+      "id": "0f2e36c4-3347-4763-a7f6-77aa91a49274",
+      "userId": "46ab6f11-f764-44c1-8e3c-5595c6cf1f6b",
+      "name": "gewg",
+      "description": "gewg",
+      "thumbnail": "https://img.freepik.com/foto-gratis/mundo-escuchando-musica_1048-5308.jpg?w=2000",
+      "tracks": [
+        {
+          "id": 2,
+          "name": "Alone",
+          "artist": "Color Out",
+          "url": "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583929/tracks-dev/Color_Out_-_Alone_aw3gmk.mp3",
+          "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/alone_rfib7a.jpg",
+          "genre": "poprock"
+        },
+        {
+          "id": 12,
+          "name": "Under Water",
+          "artist": "THE.MADPIX.PROJECT",
+          "url": "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586422/tracks-dev/The.madpix.project_-_Under_Water_2_gyvrkl.mp3",
+          "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586423/tracks-thumbnails-dev/Under_Water_yoirsy.jpg",
+          "genre": "electronic"
+        },
+        {
+          "id": 14,
+          "name": "My Love",
+          "artist": "Modus",
+          "url": "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586724/tracks-dev/MODUS_-_My_Love_z7tzk1.mp3",
+          "thumbnail": "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586719/tracks-thumbnails-dev/My_love_wqjuiz.jpg",
+          "genre": "pop"
+        }
+      ]
     }
   ],
   "tracks": [
@@ -607,8 +640,8 @@
       "id": "46ab6f11-f764-44c1-8e3c-5595c6cf1f6b",
       "userData": {
         "username": "AlvaroAlonso",
-        "first_name": "Alvaro",
-        "last_name": "Irurita",
+        "first_name": "AlvaroAlonso",
+        "last_name": "pepe",
         "email": "airuritac@gmail.com",
         "password": "123"
       },
