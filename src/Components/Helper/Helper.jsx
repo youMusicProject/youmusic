@@ -1,18 +1,21 @@
 import { useEffect } from "react";
 
 // redux
-import { fetchGetAlbums, fetchGetArtists, fetchGetGenresList, fetchGetPlaylists, fetchGetTracks, fetchGetUsers } from "../../Api/Api";
+import { fetchGet } from "../../Api/Api";
 import { useDispatch } from 'react-redux';
+import { setTracksList } from "../../redux/features/tracks/tracksSlice";
+import { setArtistsList } from "../../redux/features/artists/artistsSlice";
+import { setPlaylistsList } from "../../redux/features/playlist/playlistSlice";
 
 
 export const Helper = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchGetTracks(dispatch, "track");
+        fetchGet(dispatch, "track", setTracksList);
         // fetchGetAlbums(dispatch);
-        // fetchGetPlaylists(dispatch);
-        // fetchGetArtists(dispatch);
+        fetchGet(dispatch, "playlist", setPlaylistsList);
+        fetchGet(dispatch, "artist", setArtistsList);
         // fetchGetGenresList(dispatch);
     }, [dispatch])
 
