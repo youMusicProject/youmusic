@@ -9,12 +9,11 @@ export const Helper = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchGetUsers(dispatch);
-        fetchGetTracks(dispatch);
-        fetchGetAlbums(dispatch);
-        fetchGetPlaylists(dispatch);
-        fetchGetArtists(dispatch);
-        fetchGetGenresList(dispatch);
+        fetchGetTracks(dispatch, "track");
+        // fetchGetAlbums(dispatch);
+        // fetchGetPlaylists(dispatch);
+        // fetchGetArtists(dispatch);
+        // fetchGetGenresList(dispatch);
     }, [dispatch])
 
 }

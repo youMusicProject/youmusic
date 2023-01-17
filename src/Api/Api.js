@@ -7,19 +7,12 @@ import { setArtistsList } from "../redux/features/artists/artistsSlice";
 import { setUserList, setUserLogged } from "../redux/features/user/userSlice";
 import { setGenresList } from "../redux/features/genres/genresSlice";
 
-export const fetchGetUsers = async (dispatch) => {
-    try {
-        const response = await axios.get('http://localhost:4000/users');
-        await dispatch(setUserList(response.data));
-    } catch (error) {
-        console.log(error);
-    };
-}
 
-export const fetchGetTracks = async (dispatch) => {
+export const fetchGetTracks = async (dispatch, route) => {
     try {
-        const resp = await axios.get('http://localhost:4000/tracks');
-        await dispatch(setTracksList(resp.data));
+        const resp = await axios.get(`http://localhost:4000/api/${route}/get`);
+        console.log(resp.data.tracks);
+        await dispatch(setTracksList(resp.data.tracks));
     } catch (error) {
         console.log(error);
     }
