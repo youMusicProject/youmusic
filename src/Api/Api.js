@@ -7,13 +7,11 @@ import { setUserLogged } from "../redux/features/user/userSlice";
 export const fetchGet = async (dispatch, route, setList) => {
     try {
         const resp = await axios.get(`http://localhost:4000/api/${route}/get`);
-        console.log(resp.data.info);
         await dispatch(setList(resp.data.info));
     } catch (error) {
         console.log(error);
     }
 }
-
 
 
 export const functionLogin = (e, userData, dispatch) => {
