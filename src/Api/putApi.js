@@ -1,6 +1,21 @@
 import axios from "axios";
 import { setNewPassword } from "../redux/features/user/userSlice";
 
+export const fetchEditUser = async (serverUrl, editUser,token, dispatch, setUserEdit) => {
+    const response = await fetch(`${serverUrl}/api/user/edituser/${editUser._id}`, {
+        method: "PUT",
+        body: JSON.stringify(editUser),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    const data = await response.json();
+    console.log(data);
+    if (data.response) {
+        dispatch(setUserEdit(editUser))
+    }
+}
 
 export const fetchPutUser = async (id, userEdited, dispatch) => {
     try {

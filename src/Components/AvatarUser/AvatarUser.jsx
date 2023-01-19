@@ -2,21 +2,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 // import { useSelector } from 'react-redux';
 import { FaUserCircle } from "react-icons/fa";
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useDispatch } from 'react-redux';
-import { setUserLogOut } from '../../redux/features/user/userSlice';
-import { setTrack } from '../../redux/features/player/playerSlice';
 import { useNavigate } from 'react-router-dom';
 import LogoutAuthButton from '../Auth0/LogoutAuthButton';
 
 export function AvatarUser() {
     const navigate = useNavigate();
     // const usersData = useSelector(state => state.userSlice)
-    const logout = () => {
-        dispatch(setUserLogOut());
-        dispatch(setTrack(''))
-    }
-
-    const dispatch = useDispatch();
     return (
         <>
             <DropdownButton
