@@ -29,25 +29,6 @@ function App() {
   }
 
 
-
-  // if (isAuthenticated) {
-  //   return (
-  //     <div>
-  //       Hello {user.name}{' '}
-  //       <button onClick={() => logout({ returnTo: window.location.origin })}>
-  //         Log out
-  //       </button>
-  //     </div>
-  //   );
-  // } else {
-  //   // return <button onClick={loginWithRedirect}>Log in</button>;
-  // }
-
-
-
-// movidita conflicto return-
-
-
 return (
   <>
     <Helper />

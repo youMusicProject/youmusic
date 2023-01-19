@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setUserLogOut } from '../../redux/features/user/userSlice';
 import { setTrack } from '../../redux/features/player/playerSlice';
 import { useNavigate } from 'react-router-dom';
+import LogoutAuthButton from '../Auth0/LogoutAuthButton';
 
 export function AvatarUser() {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ export function AvatarUser() {
                 <Dropdown.Item eventKey="2">Another</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Something</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item eventKey="4" onClick={() => logout()}>Log out</Dropdown.Item>
+                <Dropdown.Item eventKey="4" ><LogoutAuthButton /></Dropdown.Item>
             </DropdownButton>
         </>
 
