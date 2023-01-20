@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import '../Card.css'
 import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ArtistCard = ({ data, size, img }) => {
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice);
     const navigate = useNavigate();
+    const { getAccessTokenSilently } = useAuth0();
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
 
     const tracks = useSelector(state => state.trackSlice);
     const tracksArtist = tracks.list.filter((track) => track.artist === data.name);
@@ -21,8 +24,8 @@ const ArtistCard = ({ data, size, img }) => {
 
         <div className={size} >
             {
-                usersData.isLogged ? <button className='btnheart btn' onClick={() => likedArtist(data, usersData, dispatch)}>{
-                    usersData.userLogged.liked_artist.find((like) => like.id === data.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                usersData.isLogged ? <button className='btnheart btn' onClick={() => likedArtist(data, usersData, dispatch, getAccessTokenSilently, serverUrl)}>{
+                    usersData.userLogged.liked_artist.find((like) => like._id === data._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
                 }</button> : ""
             }
             <button className='btn btnplay' onClick={() => setPlayer(tracksArtist, dispatch, usersData)}><BsFillPlayCircleFill /></button>
