@@ -38,36 +38,6 @@ export const fetchLike = async (serverUrl, editUser, token, dispatch, setUserEdi
     }
 }
 
-// export const fetchLikeAlbum = async (serverUrl, editUser, token, dispatch, setUserEdit) => {
-//     const response = await fetch(`${serverUrl}/api/user/edituser/${editUser._id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(editUser),
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         }
-//     })
-//     const data = await response.json();
-//     if (data.response) {
-//         dispatch(setUserEdit(editUser))
-//     }
-// }
-
-// export const fetchLikePlaylist = async (serverUrl, editUser, token, dispatch, setUserEdit) => {
-//     const response = await fetch(`${serverUrl}/api/user/edituser/${editUser._id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(editUser),
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         }
-//     })
-//     const data = await response.json();
-//     if (data.response) {
-//         dispatch(setUserEdit(editUser))
-//     }
-// }
-
 //DEBERIAMOS BORRAR ESTE FETCH?
 export const fetchUserEdited = async (id, editUser) => {
     try {
@@ -76,21 +46,6 @@ export const fetchUserEdited = async (id, editUser) => {
         console.log(error)
     }
 }
-
-// export const fetchLikeArtist = async (serverUrl, editUser, token, dispatch, setUserEdit) => {
-//     const response = await fetch(`${serverUrl}/api/user/edituser/${editUser._id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(editUser),
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`
-//         }
-//     })
-//     const data = await response.json();
-//     if (data.response) {
-//         dispatch(setUserEdit(editUser))
-//     }
-// }
 
 export const fetchAddPlaylist = async (playlistAdded) => {
     try {
