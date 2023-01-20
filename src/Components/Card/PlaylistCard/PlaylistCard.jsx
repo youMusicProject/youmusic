@@ -11,7 +11,7 @@ const PlaylistCard = ({ data, size, img }) => {
     const navigate = useNavigate();
 
     const openSong = (data) => {
-        navigate(`/playlist/${data.id}`)
+        navigate(`/playlist/${data._id}`)
     }
 
     return (

@@ -11,17 +11,17 @@ import { TableSongs } from '../Components/TableSongs/TableSongs';
 
 
 export const PlaylistPage = () => {
-    const { id } = useParams();
+    const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice);
     const playlists = useSelector(state => state.playlistSlice.list);
-    const playlist = playlists.find((element) => element.id === id);
-    const dispatch = useDispatch();
+    const { id } = useParams();
+    const playlist = playlists.find((element) => element._id === id);
 
     const info = playlist.tracks;
 
     return (
         <>
-          
+
             <div className="mx-0 song">
                 <div className="">
                     <div className="">

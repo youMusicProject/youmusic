@@ -10,7 +10,7 @@ import AlbumSlider from '../Components/Slider/AlbumSlider/AlbumSlider';
 export const AlbumPage = () => {
     const { id } = useParams();
     const albums = useSelector(state => state.albumSlice.list);
-    const album = albums.find((element) => element.id === parseInt(id));
+    const album = albums.find((element) => element._id === id);
     const tracks = useSelector(state => state.trackSlice);
 
     return (

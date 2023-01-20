@@ -10,7 +10,7 @@ import { TableSongs } from '../Components/TableSongs/TableSongs';
 export const ArtistPage = () => {
     const { id } = useParams();
     const artists = useSelector(state => state.artistSlice);
-    const artist = artists.list.find((element) => element.id === parseInt(id));
+    const artist = artists.list.find((element) => element._id === id);
     const tracks = useSelector(state => state.trackSlice);
     const tracksArtist = tracks.list.filter((track) => track.artist === artist.name);
     const albums = useSelector(state => state.albumSlice);
