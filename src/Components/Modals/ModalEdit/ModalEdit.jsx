@@ -9,8 +9,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { fetchEditUser } from '../../../Api/putApi';
 
 
-
-
 export const ModalEdit = () => {
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const [fullscreen, setFullscreen] = useState(true);

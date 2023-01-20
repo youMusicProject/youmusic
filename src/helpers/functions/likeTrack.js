@@ -1,14 +1,16 @@
 import { fetchLikeAlbum, fetchLikeArtist, fetchLikePlaylist, fetchLikeTrack } from "../../Api/putApi";
-import { setUserLikedAlbum, setUserLikedArtist, setUserLikedPlaylist, setUserLikedTrack, setUserUnlikedAlbum, setUserUnlikedArtist, setUserUnlikedPlaylist, setUserUnlikedTrack } from "../../redux/features/user/userSlice";
+import { setUserEdit, setUserLikedAlbum, setUserLikedArtist, setUserLikedPlaylist, setUserLikedTrack, setUserUnlikedAlbum, setUserUnlikedArtist, setUserUnlikedPlaylist, setUserUnlikedTrack } from "../../redux/features/user/userSlice";
 
-export const likedTrack = (data, usersData, dispatch) => {
-    const checkLiked = usersData.userLogged.liked_tracks.find((like) => like.id === data.id)
+export const likedTrack = async (data, usersData, dispatch, getAccessTokenSilently, serverUrl) => {
+    const checkLiked = usersData.userLogged.liked_tracks.find((like) => like._id === data._id)
+    const token = await getAccessTokenSilently();
+
     if (!checkLiked) {
         const userEdited = {
             ...usersData.userLogged,
             'liked_tracks': [...usersData.userLogged.liked_tracks, data]
         }
-        fetchLikeTrack(userEdited);
+        fetchLikeTrack(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserLikedTrack(data));
     } else {
         const unlikedTrack = usersData.userLogged.liked_tracks.filter((track) => {
@@ -18,7 +20,7 @@ export const likedTrack = (data, usersData, dispatch) => {
             ...usersData.userLogged,
             'liked_tracks': unlikedTrack
         }
-        fetchLikeTrack(userEdited);
+        fetchLikeTrack(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserUnlikedTrack(userEdited))
     }
 }
@@ -70,25 +72,25 @@ export const likedArtist = (data, usersData, dispatch) => {
     }
 }
 
-export const likedPlaylist = (data, usersData, dispatch) => {
-    const checkLiked = usersData.userLogged.myplaylists.find((like) => like.id === data.id);
-
+export const likedPlaylist = async (data, usersData, dispatch, getAccessTokenSilently, serverUrl) => {
+    const checkLiked = usersData.userLogged.myplaylists.find((like) => like._id === data._id);
+    const token = await getAccessTokenSilently();
+    
     if (!checkLiked) {
         const userEdited = {
             ...usersData.userLogged,
             'myplaylists': [...usersData.userLogged.myplaylists, data]
         }
-
         dispatch(setUserLikedPlaylist(data));
-        fetchLikePlaylist(userEdited);
+        fetchLikePlaylist(serverUrl, userEdited, token, dispatch, setUserEdit);
     } else {
-        const unlikedPlaylist = usersData.userLogged.myplaylists.filter((playlist) => playlist.id !== data.id)
+        const unlikedPlaylist = usersData.userLogged.myplaylists.filter((playlist) => playlist._id !== data._id)
         const userEdited = {
             ...usersData.userLogged,
             'myplaylists': unlikedPlaylist
         }
         dispatch(setUserUnlikedPlaylist(userEdited))
-        fetchLikePlaylist(userEdited);
+        fetchLikePlaylist(serverUrl, userEdited, token, dispatch, setUserEdit);
     }
 }
 

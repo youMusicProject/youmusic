@@ -9,7 +9,6 @@ import { setPlaylistsList } from "../../redux/features/playlist/playlistSlice";
 import { setAlbumsList } from "../../redux/features/albums/albumsSlice";
 import { setGenresList } from "../../redux/features/genres/genresSlice";
 
-
 import { setUserLogged } from "../../redux/features/user/userSlice";
 import { useAuth0 } from '@auth0/auth0-react';
 
