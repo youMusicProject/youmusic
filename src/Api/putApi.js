@@ -47,10 +47,10 @@ export const fetchUserEdited = async (id, editUser) => {
     }
 }
 
-export const fetchAddPlaylist = async (playlistAdded) => {
-    try {
-        await axios.put(`http://localhost:4000/playlists/${playlistAdded.id}`, playlistAdded)
-    } catch (error) {
-        console.log(error);
-    }
-}
+// export const fetchAddPlaylist = async (playlistAdded) => {
+//     try {
+//         await axios.put(`http://localhost:4000/playlists/${playlistAdded.id}`, playlistAdded)
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }

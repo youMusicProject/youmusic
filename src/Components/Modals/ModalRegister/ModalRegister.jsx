@@ -5,25 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { functionRegister } from "../../../Api/postApi";
 
 
 export const ModalRegister = () => {
     const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
-    const dispatch = useDispatch();
-    const userData = useSelector(state => state.userSlice);
     const [error, setError] = useState('');
 
     function handleShow(v) {
         setFullscreen(v);
         setShow(true);
     }
-    const register = (e) => {
-        e.preventDefault();
-        // Call backend
-        functionRegister(e, userData, dispatch, setShow, setError);
-    }
+
     return (
         <>
             <Button variant='link' onClick={() => handleShow('sm-down')} className='text-decoration-none color-pink'>Create New YouMusic ID <IoIosArrowForward /></Button>
@@ -36,7 +29,7 @@ export const ModalRegister = () => {
                 <Modal.Body>
                     <div className='m-4 row'><h1 className='text-center'>Create ID</h1></div>
                     <div className='mx-2'>
-                        <form onSubmit={e => register(e)} className="needs-validation">
+                        <form className="needs-validation">
                             <div className="row g-3">
 
                                 <div className="form-floating mb-3">

@@ -1,10 +1,11 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState } from 'react'
 import { Modal } from "react-bootstrap";
 import { BsMusicNoteList } from 'react-icons/bs';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchPostEditedPlaylist } from '../../../Api/postApi';
+import { fetchAddPlaylist } from '../../../Api/postApi';
 import { createNewPlaylist } from '../../../redux/features/playlist/playlistSlice';
 
 const ModalEditedPlaylist = () => {
@@ -12,6 +13,8 @@ const ModalEditedPlaylist = () => {
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice);
+    const { getAccessTokenSilently } = useAuth0();
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
 
     function handleShow(v) {
         setFullscreen(v);
@@ -21,16 +24,13 @@ const ModalEditedPlaylist = () => {
         e.preventDefault();
 
         const newPlaylist = {
-            id: uuidv4(),
-            userId: usersData.userLogged.id,
+            userId: usersData.userLogged._id,
             name: e.target.name.value,
             description: e.target.description.value,
             thumbnail: e.target.img.value ? e.target.img.value : 'https://larepublica.pe/resizer/632M9vfX7i5PUUkywOaFjXBmzE0=/480x282/top/smart/cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/RW25RRXAFZFHZCPDX4K2RPLFOY.jpg',
-            // publicAccessible: e.target.public.value,
-            tracks: [],
+            publicAccessible: e.target.public.value,
         }
-        dispatch(createNewPlaylist(newPlaylist));
-        fetchPostEditedPlaylist(newPlaylist)
+        fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch)
         setShow(false);
     }
 
@@ -66,6 +66,13 @@ const ModalEditedPlaylist = () => {
                                 <div className="form-floating mb-3">
                                     <input type="text" name="img" className="form-control" id="floatingInput" placeholder="Choose pic" />
                                     <label htmlFor="floatingInput">Image for your playlist</label>
+                                </div>
+
+                                <div className='form-floating mb-3'>
+                                    <select name='public' id="publicPrivateOption">
+                                        <option defaultValue="public">Public</option>
+                                        <option value="private">Private</option>
+                                    </select>
                                 </div>
 
                             </div>

@@ -7,7 +7,7 @@ import { NavDropdown } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlaylist';
 import { addSongToPlaylist } from '../../redux/features/playlist/playlistSlice';
-import { fetchAddPlaylist } from '../../Api/putApi';
+import { fetchAddPlaylist } from '../../Api/postApi';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -16,17 +16,17 @@ const DropdownDot = ({ data }) => {
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice)
     const playlists = useSelector(state => state.playlistSlice.list);
-    const playlist = usersData.isLogged ? playlists.filter((element) => element.userId === (usersData.userLogged.id)) : '';
+    const playlist = usersData.isLogged ? playlists.filter((element) => element.userId === (usersData.userLogged._id)) : '';
 
 
     const addToPlaylist = (song, playlist) => {
-        const selectedPlaylist = playlist.tracks.find((e) => e.id === song.id)
+        const selectedPlaylist = playlist.tracks.find((e) => e._id === song._id)
         if (!selectedPlaylist) {
             const playlistAdded = {
                 ...playlist,
                 'tracks': [...playlist.tracks, song]
             }
-            const playlistTotal = playlists.map(p => playlistAdded.id === p.id ? {
+            const playlistTotal = playlists.map(p => playlistAdded._id === p._id ? {
                 ...p,
                 tracks: [...playlist.tracks, song]
             } : p)

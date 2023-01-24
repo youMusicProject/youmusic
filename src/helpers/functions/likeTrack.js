@@ -10,6 +10,7 @@ export const likedTrack = async (data, usersData, dispatch, getAccessTokenSilent
             ...usersData.userLogged,
             'liked_tracks': [...usersData.userLogged.liked_tracks, data]
         }
+        console.log(userEdited);
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserLikedTrack(data));
     } else {
@@ -20,6 +21,7 @@ export const likedTrack = async (data, usersData, dispatch, getAccessTokenSilent
             ...usersData.userLogged,
             'liked_tracks': unlikedTrack
         }
+        console.log(userEdited);
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserUnlikedTrack(userEdited))
     }
@@ -52,12 +54,13 @@ export const likedAlbum = async (data, usersData, dispatch, getAccessTokenSilent
 export const likedArtist = async (data, usersData, dispatch, getAccessTokenSilently, serverUrl) => {
     const checkLiked = usersData.userLogged.liked_artist.find((like) => like._id === data._id);
     const token = await getAccessTokenSilently();
-
+    
     if (!checkLiked) {
         const userEdited = {
             ...usersData.userLogged,
             'liked_artist': [...usersData.userLogged.liked_artist, data]
         }
+        console.log(userEdited);
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserLikedArtist(data));
     } else {
@@ -68,6 +71,7 @@ export const likedArtist = async (data, usersData, dispatch, getAccessTokenSilen
             ...usersData.userLogged,
             'liked_artist': unlikedArtist
         }
+        console.log(userEdited);
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
         dispatch(setUserUnlikedArtist(userEdited))
     }
@@ -76,21 +80,20 @@ export const likedArtist = async (data, usersData, dispatch, getAccessTokenSilen
 export const likedPlaylist = async (data, usersData, dispatch, getAccessTokenSilently, serverUrl) => {
     const checkLiked = usersData.userLogged.myplaylists.find((like) => like._id === data._id);
     const token = await getAccessTokenSilently();
-    
     if (!checkLiked) {
         const userEdited = {
             ...usersData.userLogged,
             'myplaylists': [...usersData.userLogged.myplaylists, data]
         }
-        dispatch(setUserLikedPlaylist(data));
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
+        dispatch(setUserLikedPlaylist(data));
     } else {
         const unlikedPlaylist = usersData.userLogged.myplaylists.filter((playlist) => playlist._id !== data._id)
         const userEdited = {
             ...usersData.userLogged,
             'myplaylists': unlikedPlaylist
         }
-        dispatch(setUserUnlikedPlaylist(userEdited))
         fetchLike(serverUrl, userEdited, token, dispatch, setUserEdit);
+        dispatch(setUserUnlikedPlaylist(userEdited))
     }
 }
