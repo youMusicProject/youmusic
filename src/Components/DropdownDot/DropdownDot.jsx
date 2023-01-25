@@ -8,8 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlaylist';
 import { addSongToPlaylist } from '../../redux/features/playlist/playlistSlice';
 import { fetchAddPlaylist } from '../../Api/postApi';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 const DropdownDot = ({ data }) => {
 

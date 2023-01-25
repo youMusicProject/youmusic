@@ -5,7 +5,7 @@ export const fetchAddPlaylist = async (serverURL, newPlaylist, getAccessTokenSil
     try {
         const token = await getAccessTokenSilently();
     
-        const response = await fetch(`${serverURL}/api/playlist/createplaylist`, {
+        const response = await fetch(`${serverURL}/api/playlist/new`, {
             method: "POST",
             body: JSON.stringify(newPlaylist),
             headers: {

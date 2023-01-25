@@ -4,7 +4,6 @@ import { MainBtn } from "../../Buttons/MainBtn/MainBtn";
 import { IoIosArrowBack } from "react-icons/io";
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPutUser } from "../../../Api/putApi";
 
 
 export const ModalRecoveryPassword = () => {
@@ -34,7 +33,6 @@ export const ModalRecoveryPassword = () => {
         }
         // auth interim with form...
         if (interim && interim.question === form_user.question && interim.answer === form_user.answer) {
-            fetchPutUser(edit_user.id, edit_user, dispatch);
             setShow(false);
             console.log('changed password correctly');
         } else alert('Incorrect data try again');

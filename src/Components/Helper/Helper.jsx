@@ -16,7 +16,6 @@ export const Helper = () => {
     const dispatch = useDispatch();
     const { getAccessTokenSilently, user } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
-
     useEffect(() => {
         // fetchGet(dispatch, "user", setUserList);
         fetchGet(dispatch, "track", setTracksList);
@@ -26,18 +25,17 @@ export const Helper = () => {
         fetchGet(dispatch, "genre", setGenresList);
         // fetchGetGenresList(dispatch);
     }, [dispatch])
-
+    
     useEffect(() => {
         if (user) {
             checkUser();
         }
     }, [user]);
-
+    
     const checkUser = async () => {
         // PETICION AL BACKEND
         const token = await getAccessTokenSilently();
-
-        const response = await fetch(`${serverUrl}/api/user/checkuser/${user.email}`, {
+        const response = await fetch(`${serverUrl}/api/user/check/${user.email}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -48,7 +46,7 @@ export const Helper = () => {
         // CONDICIONAL - EL BACK NOS DEVUELVE TRUE O FALSE
         if (!!responseData.info[0]) {
             console.log('El usuario existe en la bbdd');
-            await dispatch(setUserLogged(responseData.info[0]));
+            dispatch(setUserLogged(responseData.info[0]));
         } else {
             // SI NO EXISTE, CREAR USER CON POST
             console.log('El usuario no existe en la bbdd');
@@ -64,7 +62,7 @@ export const Helper = () => {
                 }
             }
 
-            const request = await fetch(`${serverUrl}/api/user/createuser`, {
+            const request = await fetch(`${serverUrl}/api/user/new`, {
                 method: "POST",
                 body: JSON.stringify($user),
                 headers: {
@@ -74,7 +72,7 @@ export const Helper = () => {
             });
             const data = await request.json()
             console.log(data);
-            await dispatch(setUserLogged(data.info));
+            dispatch(setUserLogged(data.info));
             // setuserLoged(data.post);
             // setMessage(data.mensaje);
         }

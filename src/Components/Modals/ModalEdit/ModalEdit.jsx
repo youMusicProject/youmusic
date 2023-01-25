@@ -7,6 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchEditUser } from '../../../Api/putApi';
+import { uploadCloudinary } from '../../../helpers/functions/uploadCloudinary';
 
 
 export const ModalEdit = () => {
@@ -26,21 +27,27 @@ export const ModalEdit = () => {
     }
 
     const editForm = async (e) => {
-        e.preventDefault()
-        const token = await getAccessTokenSilently();
-
-        const editUser = {
-            ...user,
-            "userData": {
-                ...user.userData,
-                username: e.target.username.value,
-                first_name: e.target.first_name.value,
-                last_name: e.target.last_name.value,
-                complete_name: `${e.target.first_name.value} ${e.target.last_name.value}`
+        e.preventDefault();
+        try {
+            const file = e.target.img.files;
+            const src = await uploadCloudinary(file, "youmusic_img");
+    
+            const token = await getAccessTokenSilently();
+            const editUser = {
+                ...user,
+                "userData": {
+                    ...user.userData,
+                    username: e.target.username.value,
+                    first_name: e.target.first_name.value,
+                    last_name: e.target.last_name.value,
+                    complete_name: `${e.target.first_name.value} ${e.target.last_name.value}`,
+                    profilePicture: src
+                }
             }
-
+            fetchEditUser(serverUrl, editUser, token, dispatch, setUserEdit)
+        } catch (error) {
+            console.log(error);
         }
-        fetchEditUser(serverUrl, editUser, token, dispatch, setUserEdit)
     }
 
     return (
@@ -72,6 +79,11 @@ export const ModalEdit = () => {
                                 <div className="form-floating mb-3">
                                     <input type="text" name="last_name" className="form-control" placeholder="name@example.com" defaultValue={user.userData.last_name} />
                                     <label htmlFor="floatingInput">Last name</label>
+                                </div>
+
+                                <div className="mb-3">
+                                    <label htmlFor="formFile" name="myImage" accept="image/png, image/jpeg, image/jpg" className="form-label">Update profile picture</label>
+                                    <input className="form-control" name='img' type="file" id="formFile" />
                                 </div>
                             </div>
                             <button className="mt-4 w-100 btn btn-color btn-lg" type="submit" onClick={() => setShow(false)}>Save</button>
