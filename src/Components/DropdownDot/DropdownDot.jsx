@@ -41,12 +41,7 @@ const DropdownDot = ({ data }) => {
         <>
             <DropdownButton
                 className='my-dropdown-toggle dot'
-                drop=''
-                variant=""
-                title=<BsThreeDots className=''
-
-                />
-
+                title=<BsThreeDots />
             >
 
                 <Dropdown.Item > <ModalEditedPlaylist /> </Dropdown.Item>

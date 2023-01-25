@@ -1,12 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Modal } from "react-bootstrap";
 import { BsMusicNoteList } from 'react-icons/bs';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import { fetchAddPlaylist } from '../../../Api/postApi';
-import { createNewPlaylist } from '../../../redux/features/playlist/playlistSlice';
+import { uploadCloudinary } from '../../../helpers/functions/uploadCloudinary';
 
 const ModalEditedPlaylist = () => {
     const [fullscreen, setFullscreen] = useState(true);
@@ -20,18 +19,26 @@ const ModalEditedPlaylist = () => {
         setFullscreen(v);
         setShow(true);
     }
-    const functionPlaylistEdited = (e) => {
+    const functionPlaylistEdited = async (e) => {
         e.preventDefault();
 
-        const newPlaylist = {
-            userId: usersData.userLogged._id,
-            name: e.target.name.value,
-            description: e.target.description.value,
-            thumbnail: e.target.img.value ? e.target.img.value : 'https://larepublica.pe/resizer/632M9vfX7i5PUUkywOaFjXBmzE0=/480x282/top/smart/cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/RW25RRXAFZFHZCPDX4K2RPLFOY.jpg',
-            publicAccessible: e.target.public.value,
+        try {
+            const file = e.target.img.files
+            const src = await uploadCloudinary(file, "youmusic_img")
+
+            const newPlaylist = {
+                userId: usersData.userLogged.id,
+                name: e.target.name.value,
+                description: e.target.description.value,
+                thumbnail: src,
+                publicAccessible: e.target.public.value,
+            }
+
+            fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch)
+            setShow(false);
+        } catch (error) {
+            console.log(error);
         }
-        fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch)
-        setShow(false);
     }
 
     return (
@@ -63,9 +70,9 @@ const ModalEditedPlaylist = () => {
                                     <label htmlFor="floatingInput">Description</label>
                                 </div>
 
-                                <div className="form-floating mb-3">
-                                    <input type="text" name="img" className="form-control" id="floatingInput" placeholder="Choose pic" />
-                                    <label htmlFor="floatingInput">Image for your playlist</label>
+                                <div className="mb-3">
+                                    <label htmlFor="formFile" name="myImage" accept="image/png, image/jpeg, image/jpg" className="form-label">Upload image for your playlist</label>
+                                    <input className="form-control" name='img' type="file" />
                                 </div>
 
                                 <div className='form-floating mb-3'>
