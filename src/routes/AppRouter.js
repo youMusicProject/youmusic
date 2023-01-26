@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { AdminArtistPanel } from '../pages/AdminArtistPanel'
 import { AlbumPage } from '../pages/AlbumPage'
 import { ArtistPage } from '../pages/ArtistPage'
 import { ExplorePage } from '../pages/ExplorePage'
@@ -25,6 +26,7 @@ const AppRouter = () => {
                 <Route path="/search" element={<SearchPage />} />
 
                 <Route path='/profile' element={<PrivateRoutes><ProfilePage /></PrivateRoutes>} />
+                <Route path="/artistpanel" element={<PrivateRoutes><AdminArtistPanel /></PrivateRoutes>} />
             </Routes>
         </>
     )

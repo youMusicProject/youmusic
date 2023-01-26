@@ -6,6 +6,8 @@ import Slider from "../Components/Slider/Slider"
 import { breakpoints_album, breakpoints_small } from "../helpers/functions/breakpoint";
 import SearchPage from "./SearchPage";
 import { useSearchParams } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
+import Spinner from 'react-bootstrap/Spinner';
 
 const HomePage = () => {
   const userData = useSelector(state => state.userSlice);
@@ -17,11 +19,23 @@ const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";
 
+  const { isLoading, error } = useAuth0();
+
   const handleFilter = (e) => {
     setSearchParams({ filter: e.target.value });
-
   }
 
+
+  if (isLoading) {
+    return (
+      <div className="grid-center mt-5">
+        <Spinner animation="grow" variant="primary" />
+      </div>
+    );
+  }
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
   return (
     <>
       <div className="cardContainer">

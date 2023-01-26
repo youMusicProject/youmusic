@@ -6,7 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 import { IoIosArrowBack } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import { useAuth0 } from '@auth0/auth0-react';
-import { fetchEditUser } from '../../../Api/putApi';
+import { fetchEdit } from '../../../Api/putApi';
 import { uploadCloudinary } from '../../../helpers/functions/uploadCloudinary';
 
 
@@ -44,7 +44,7 @@ export const ModalEdit = () => {
                     profilePicture: src
                 }
             }
-            fetchEditUser(serverUrl, editUser, token, dispatch, setUserEdit)
+            fetchEdit("user", serverUrl, editUser, token, dispatch, setUserEdit)
         } catch (error) {
             console.log(error);
         }

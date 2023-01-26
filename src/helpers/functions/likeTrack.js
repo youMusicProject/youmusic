@@ -1,4 +1,4 @@
-import { fetchEditUser } from "../../Api/putApi";
+import { fetchEdit } from "../../Api/putApi";
 import {
   setUserEdit,
   setUserLikedAlbum,
@@ -29,7 +29,7 @@ export const likedTrack = async (
       liked_tracks: [...usersData.userLogged.liked_tracks, data],
     };
     console.log(userEdited);
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserLikedTrack(data));
   } else {
     const unlikedTrack = usersData.userLogged.liked_tracks.filter((track) => {
@@ -40,7 +40,7 @@ export const likedTrack = async (
       liked_tracks: unlikedTrack,
     };
     console.log(userEdited);
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedTrack(userEdited));
   }
 };
@@ -62,7 +62,7 @@ export const likedAlbum = async (
       ...usersData.userLogged,
       liked_album: [...usersData.userLogged.liked_album, data],
     };
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserLikedAlbum(data));
   } else {
     const unlikedAlbum = usersData.userLogged.liked_album.filter((album) => {
@@ -72,7 +72,7 @@ export const likedAlbum = async (
       ...usersData.userLogged,
       liked_album: unlikedAlbum,
     };
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedAlbum(userEdited));
   }
 };
@@ -95,7 +95,7 @@ export const likedArtist = async (
       liked_artist: [...usersData.userLogged.liked_artist, data],
     };
     console.log(userEdited);
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserLikedArtist(data));
   } else {
     const unlikedArtist = usersData.userLogged.liked_artist.filter((artist) => {
@@ -106,7 +106,7 @@ export const likedArtist = async (
       liked_artist: unlikedArtist,
     };
     console.log(userEdited);
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedArtist(userEdited));
   }
 };
@@ -127,7 +127,7 @@ export const likedPlaylist = async (
       ...usersData.userLogged,
       myplaylists: [...usersData.userLogged.myplaylists, data],
     };
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserLikedPlaylist(data));
   } else {
     const unlikedPlaylist = usersData.userLogged.myplaylists.filter(
@@ -137,7 +137,7 @@ export const likedPlaylist = async (
       ...usersData.userLogged,
       myplaylists: unlikedPlaylist,
     };
-    fetchEditUser(serverUrl, userEdited, token, dispatch, setUserEdit);
+    fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedPlaylist(userEdited));
   }
 };

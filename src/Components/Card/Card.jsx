@@ -19,6 +19,7 @@ const Card = ({ data, size, img }) => {
         navigate(`/song/${data._id}`)
     }
 
+
     return (
 
         <div className={size} >
