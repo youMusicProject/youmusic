@@ -1,5 +1,8 @@
 import { useSelector } from 'react-redux';
 import SearchSlider from '../Components/Slider/SearchSlider/SearchSlider';
+import SearchSliderAlbum from '../Components/Slider/SearchSlider/SearchSliderAlbum';
+import SearchSliderArtist from '../Components/Slider/SearchSlider/SearchSliderArtist';
+import SearchSliderPlaylist from '../Components/Slider/SearchSlider/SearchSliderPlaylist';
 import { breakpoints_small } from '../helpers/functions/breakpoint';
 
 
@@ -63,7 +66,7 @@ const SearchPage = ({ handleFilter, filter }) => {
             {
                 filterAlbums.length > 0 &&
                 <div className="mx-2 titleCards">
-                    <SearchSlider
+                    <SearchSliderAlbum
                         slidesPerView={1}
                         size='small'
                         img='img__small'
@@ -78,7 +81,7 @@ const SearchPage = ({ handleFilter, filter }) => {
             {
                 filterArtist.length > 0 &&
                 <div className="mx-2 titleCards">
-                    <SearchSlider
+                    <SearchSliderArtist
                         slidesPerView={1}
                         size='small'
                         img='img__small'
@@ -93,7 +96,7 @@ const SearchPage = ({ handleFilter, filter }) => {
             {
                 filterPlaylist.length > 0 &&
                 <div className="mx-2 titleCards">
-                    <SearchSlider
+                    <SearchSliderPlaylist
                         slidesPerView={1}
                         size='small'
                         img='img__small'

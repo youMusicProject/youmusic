@@ -8,10 +8,13 @@ export const artistSlice = createSlice({
     reducers: {
         setArtistsList: (state, action) => {
             state.list = action.payload;
+        },
+        setNewArtist:(state, action) => {
+            state.list = [...state.list, action.payload];
         }
     }
 })
 
-export const { setArtistsList } = artistSlice.actions;
+export const { setArtistsList, setNewArtist } = artistSlice.actions;
 
 export default artistSlice.reducer;

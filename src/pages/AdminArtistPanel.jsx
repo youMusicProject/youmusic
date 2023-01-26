@@ -1,18 +1,18 @@
-import React from 'react'
 import { Tab, Table, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 
 export const AdminArtistPanel = () => {
     // Buscar el artista con el id del user, mostrar sus propiedades
     const userRedux = useSelector(state => state.userSlice);
-    console.log(userRedux);
+    // console.log(userRedux);
 
-    
+
 
     return (
         <div className="container mb-5">
             <div className="row no-gutters">
-                <div className="col-md-4 col-lg-4"><img src="https://i.imgur.com/aCwpF7V.jpg" /></div>
+                <div className="img-panel col-md-4 col-lg-4"><img src="https://i.imgur.com/aCwpF7V.jpg" /></div>
                 <div className="col-md-8 col-lg-8">
                     <div className="d-flex flex-column">
                         <div className="d-flex flex-row justify-content-between align-items-center p-5 bg-dark text-white">
@@ -31,67 +31,75 @@ export const AdminArtistPanel = () => {
                 >
                     <Tab eventKey="song" title="Song">
 
-                        <Table striped bordered hover >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td colSpan={2}>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <div className="table-panel table-responsive">
+                            <table className="table table-borderless mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                        </th>
+                                        <th scope="col">NAME</th>
+                                        <th scope="col">ARTIST</th>
+                                        <th scope="col">GENRE</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                        </th>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>61</td>
+                                        <td>
+                                            <button type="button" className="btn btn-outline-success btn-sm px-3">
+                                                <AiOutlineEdit />
+                                            </button>
+                                            {' '}
+                                            <button type="button" className="btn btn-outline-danger btn-sm px-3">
+                                                <AiFillDelete />
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
 
                     </Tab>
                     <Tab eventKey="album" title="Album">
-                        <Table striped bordered hover >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td colSpan={2}>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <div className="table-panel table-responsive">
+                            <table className="table table-borderless mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                        </th>
+                                        <th scope="col">NAME</th>
+                                        <th scope="col">ARTIST</th>
+                                        <th scope="col">GENRE</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                        </th>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>61</td>
+                                        <td>
+                                            <button type="button" className="btn btn-outline-success btn-sm px-3">
+                                                <AiOutlineEdit />
+                                            </button>
+                                            {' '}
+                                            <button type="button" className="btn btn-outline-danger btn-sm px-3">
+                                                <AiFillDelete />
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </Tab>
                 </Tabs>
 

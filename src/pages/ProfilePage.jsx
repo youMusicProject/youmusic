@@ -11,9 +11,9 @@ export const ProfilePage = () => {
     const likedAlbums = userData.userLogged.liked_album;
     //const likedArtists = userData.userLogged.liked_artist;
     const myplaylists = userData.userLogged.myplaylists;
-    const playlists = useSelector(state => state.playlistSlice)
+    const playlists = useSelector(state => state.playlistSlice);
     //const artists = useSelector(state => state.artistSlice);
-    const personalPlaylist = playlists.list.filter(e => e.userId === userData.userLogged.id)
+    const personalPlaylist = playlists.list.filter(e => e.userId === userData.userLogged.id);
 
 
     return (

@@ -36,7 +36,9 @@ export const Aside = () => {
                         <li><Link to='/'><AiOutlinePlayCircle className='me-1' /> Listen</Link></li>
                         <li><Link to='/explore'><GiCheckboxTree className='me-1' /> Explore</Link></li>
                         <li><Link to='/'><IoIosRadio className='me-1' /> Radio</Link></li>
-                        <li><Link to='/artistpanel'><GiMedallist className='me-1' />{userRedux.isLogged ? userRedux.userLogged.role === "user" ? "soy user" : "Artist Panel" : "Artist" } </Link></li>
+                        {userRedux.isLogged ? userRedux.userLogged.role === "user" ? <li><Link to='/pre/artistpanel'><GiMedallist className='me-1' />Become Artist</Link></li>
+                            : <li><Link to='/artistpanel'><GiMedallist className='me-1' />Artist Panel</Link></li>
+                            : <li><Link to='/'><GiMedallist className='me-1' />Become Artist</Link></li>}
                     </ul>
                 </div>
                 <div className="">

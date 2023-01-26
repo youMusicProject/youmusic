@@ -14,7 +14,7 @@ const ModalEditedPlaylist = () => {
     const usersData = useSelector(state => state.userSlice);
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
-
+    
     function handleShow(v) {
         setFullscreen(v);
         setShow(true);
@@ -27,7 +27,7 @@ const ModalEditedPlaylist = () => {
             const src = await uploadCloudinary(file, "youmusic_img")
 
             const newPlaylist = {
-                userId: usersData.userLogged.id,
+                userId: usersData.userLogged._id,
                 name: e.target.name.value,
                 description: e.target.description.value,
                 thumbnail: src,

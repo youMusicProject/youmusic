@@ -147,7 +147,7 @@ body {
 }
 
 /* artist panel */
-img {
+.img-panel img {
         width: 100%;
         height: 100%;
 }
@@ -172,6 +172,10 @@ img {
         }
 }
 
-body {
-        background-color: #eeeeee;
+/* tabla  */
+.table-panel table td,
+table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
 }
