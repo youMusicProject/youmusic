@@ -20,8 +20,8 @@ export const ArtistPage = () => {
     const [album, setalbum] = useState([]);
 
     //* Falta por hacer, necesitamos que primero carge el "artist y luego que mapee el genres"
-    // const [listGenreArtist, setlistGenreArtist] = useState([]);
-    // let similarSongs = listGenreArtist.flat();
+    const [listGenreArtist, setlistGenreArtist] = useState([]);
+    let similarSongs = listGenreArtist.flat();
     // const generosArtista = artist.genres;
     // artist.genres.map((genre) => listGenreArtist = [...listGenreArtist, tracks.list.filter((track) => track.genre === genre)]);
 
@@ -31,8 +31,11 @@ export const ArtistPage = () => {
     }, [artists]);
 
     useEffect(() => {
-        settracksArtist(tracks.list.filter((track) => track.artist === artist.name));
-        setalbum(albums.list.filter((album) => album.artist === artist.name));
+        if(!!artist) {
+            settracksArtist(tracks.list.filter((track) => track.artist === artist.name));
+            setalbum(albums.list.filter((album) => album.artist === artist.name));
+        }
+
         // !!artist ? artist.genres.map((genre) => {
         //     setlistGenreArtist([...listGenreArtist, genre]);
         // }) 
@@ -50,38 +53,42 @@ export const ArtistPage = () => {
             <TableSongs songList={tracksArtist} />
 
             <div className='titleCards cardContainer'>
-                <div>
-                    <AlbumSlider
-                        slidesPerView={2}
-                        size='small'
-                        img='img__small'
-                        array={album}
-                        title='Artist albums'
-                        breakpoints={{
-                            600: {
-                                slidesPerView: 3,
-                                spaceBetween: 10,
-                            },
-                            768: {
-                                slidesPerView: 4,
-                                spaceBetween: 10,
-                            },
-                            992: {
-                                slidesPerView: 5,
-                                spaceBetween: 10,
-                            },
-                            1200: {
-                                slidesPerView: 7,
-                                spaceBetween: 10,
-                            },
-                            1400: {
-                                slidesPerView: 8,
-                                spaceBetween: 10,
-                            }
-                        }}
-                    />
-                </div>
-                {/* {similarSongs.length > 0 &&
+                {
+                    album.length > 0 &&
+                    <div>
+                        <AlbumSlider
+                            slidesPerView={2}
+                            size='small'
+                            img='img__small'
+                            array={album}
+                            title='Artist albums'
+                            breakpoints={{
+                                600: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 10,
+                                },
+                                992: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 10,
+                                },
+                                1200: {
+                                    slidesPerView: 7,
+                                    spaceBetween: 10,
+                                },
+                                1400: {
+                                    slidesPerView: 8,
+                                    spaceBetween: 10,
+                                }
+                            }}
+                        />
+                    </div>
+                }
+                {
+                    similarSongs.length > 0 &&
                     <div className="mt-2">
                         <Slider
                             slidesPerView={2}
@@ -115,7 +122,7 @@ export const ArtistPage = () => {
                     </div>
                 }
                 {
-                    listGenreArtist.map((e) => {
+                    listGenreArtist.length > 0 && listGenreArtist.map((e) => {
                         if (e.length > 0) {
                             // const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
 
@@ -155,7 +162,7 @@ export const ArtistPage = () => {
                         }
 
                     })
-                } */}
+                }
             </div>
         </>
     )

@@ -52,6 +52,8 @@ const SongPage = () => {
             <TableSongs songList={[song]} />
 
             <div className='cardContainer titleCards'>
+            {
+                listSameGenre.length > 0 &&
                 <div className='mt-2'>
                     <Slider
                         slidesPerView={1}
@@ -62,6 +64,9 @@ const SongPage = () => {
                         breakpoints={breakpoints_small}
                     />
                 </div>
+            }
+            {
+                tracks.list.length > 0 &&
                 <div className='mt-2'>
                     <Slider
                         slidesPerView={1}
@@ -72,6 +77,7 @@ const SongPage = () => {
                         breakpoints={breakpoints_small}
                     />
                 </div>
+            }
             </div>
         </>
     )
