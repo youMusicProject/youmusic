@@ -5,12 +5,15 @@ import { BsFillPlayFill, BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
 import { getRandomInt } from '../../../helpers/functions/getRandom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const TopInfoArtist = ({ data }) => {
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice);
     const tracks = useSelector(state => state.trackSlice);
     const tracksArtist = tracks.list.filter((track) => track.artist === data.name);
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
+    const { getAccessTokenSilently } = useAuth0();
 
     return (
         <div className="mx-0 song">
@@ -27,9 +30,10 @@ export const TopInfoArtist = ({ data }) => {
                         <div className='containerButton--songpage'>
                             <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(tracksArtist, dispatch, usersData)} ><BsFillPlayFill /></button>
                             {
-                                usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedArtist(data, usersData, dispatch)}>{
-                                    usersData.userLogged.liked_tracks.find((like) => like.id === data.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
-                                }</button> : ""
+                                usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedArtist(data, usersData, dispatch, getAccessTokenSilently, serverUrl)}>
+                                    {
+                                        usersData.userLogged.liked_artist.find((artist) => artist._id === data._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                                    }</button> : ""
                             }
                         </div>
                     </div>

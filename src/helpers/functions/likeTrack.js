@@ -28,7 +28,6 @@ export const likedTrack = async (
       ...usersData.userLogged,
       liked_tracks: [...usersData.userLogged.liked_tracks, data],
     };
-    console.log(userEdited);
     fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserLikedTrack(data));
   } else {
@@ -39,7 +38,6 @@ export const likedTrack = async (
       ...usersData.userLogged,
       liked_tracks: unlikedTrack,
     };
-    console.log(userEdited);
     fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedTrack(userEdited));
   }
@@ -105,7 +103,6 @@ export const likedArtist = async (
       ...usersData.userLogged,
       liked_artist: unlikedArtist,
     };
-    console.log(userEdited);
     fetchEdit("user", serverUrl, userEdited, token, dispatch, setUserEdit);
     dispatch(setUserUnlikedArtist(userEdited));
   }
