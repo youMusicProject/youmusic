@@ -8,6 +8,7 @@ import PlaylistSlider from '../Components/Slider/PlaylistSlider/PlaylistSlider';
 import { breakpoints_small } from '../helpers/functions/breakpoint';
 import { likedPlaylist } from '../helpers/functions/likeTrack';
 import { TableSongs } from '../Components/TableSongs/TableSongs';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 export const PlaylistPage = () => {
@@ -16,7 +17,8 @@ export const PlaylistPage = () => {
     const playlists = useSelector(state => state.playlistSlice.list);
     const { id } = useParams();
     const playlist = playlists.find((element) => element._id === id);
-
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
+    const { getAccessTokenSilently } = useAuth0();
     const info = playlist.tracks;
 
     return (
@@ -36,9 +38,11 @@ export const PlaylistPage = () => {
                             <div className='containerButton--songpage'>
                                 <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(info, dispatch, usersData)} ><BsFillPlayFill /></button>
                                 {
-                                    usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedPlaylist(info, usersData, dispatch)}>{
-                                        usersData.userLogged.myplaylists.find((like) => like.id === info.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
-                                    }</button> : ""
+                                    usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedPlaylist(playlist, usersData, dispatch, getAccessTokenSilently, serverUrl)}>
+                                        {
+                                            usersData.userLogged.myplaylists.find((like) => like._id === playlist._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                                        }
+                                        </button> : ""
                                 }
                             </div>
                         </div>

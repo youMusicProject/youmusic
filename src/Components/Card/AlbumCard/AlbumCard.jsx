@@ -1,21 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillPlayCircleFill, BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../Card.css'
 import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedAlbum } from '../../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const AlbumCard = ({ data, size, img }) => {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice);
     const navigate = useNavigate();
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
 
+    // const song = tracks.list.find((track) => track._id === id);
     const openSong = (data) => {
         navigate(`/album/${data._id}`)
     }
+
+    // console.log(data);
 
     return (
 

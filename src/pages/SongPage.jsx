@@ -8,6 +8,7 @@ import { setPlayer } from '../helpers/functions/setPlayer';
 import { breakpoints_small } from '../helpers/functions/breakpoint';
 import { likedTrack } from '../helpers/functions/likeTrack';
 import { TableSongs } from '../Components/TableSongs/TableSongs';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 const SongPage = () => {
@@ -17,7 +18,9 @@ const SongPage = () => {
     const song = tracks.list.find((track) => track._id === id);
     const dispatch = useDispatch();
     const genreSong = tracks.list.filter((track) => track.genre === song.genre);
-    const listSameGenre = genreSong.filter((track) => track.id !== song.id)
+    const listSameGenre = genreSong.filter((track) => track._id !== song._id)
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
+    const { getAccessTokenSilently } = useAuth0();
 
     return (
         <>
@@ -35,9 +38,10 @@ const SongPage = () => {
                             <div className='containerButton--songpage'>
                                 <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer([song], dispatch, usersData)} ><BsFillPlayFill /></button>
                                 {
-                                    usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedTrack(song, usersData, dispatch)}>{
-                                        usersData.userLogged.liked_tracks.find((like) => like.id === song.id) ? <BsSuitHeartFill /> : <BsSuitHeart />
-                                    }</button> : ""
+                                    usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedTrack(song, usersData, dispatch, getAccessTokenSilently, serverUrl)}>
+                                        {
+                                            usersData.userLogged.liked_tracks.find((like) => like._id === song._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                                        }</button> : ""
                                 }
                             </div>
                         </div>
