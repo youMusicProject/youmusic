@@ -27,6 +27,8 @@ export const ArtistPage = () => {
             <TableSongs songList={tracksArtist} />
             
             <div className='titleCards cardContainer'>
+                {
+                album.length > 0 &&
                 <div>
                     <AlbumSlider
                         slidesPerView={2}
@@ -58,7 +60,9 @@ export const ArtistPage = () => {
                         }}
                     />
                 </div>
-                {similarSongs.length > 0 &&
+                }
+                {
+                similarSongs.length > 0 &&
                     <div className="mt-2">
                         <Slider
                             slidesPerView={2}
@@ -92,7 +96,7 @@ export const ArtistPage = () => {
                     </div>
                 }
                 {
-                    listGenreArtist.map((e) => {
+                    listGenreArtist.length > 0 && listGenreArtist.map((e) => {
                         if (e.length > 0) {
                             const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
 
