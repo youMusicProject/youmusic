@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavDropdown } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlaylist';
-import { addSongToPlaylist } from '../../redux/features/playlist/playlistSlice';
-import { fetchAddPlaylist } from '../../Api/postApi';
+import { addSongToPlaylist, setPlaylistEdit } from '../../redux/features/playlist/playlistSlice';
+import { useAuth0 } from '@auth0/auth0-react';
+import { fetchEdit } from '../../Api/putApi';
 
 const DropdownDot = ({ data }) => {
 
@@ -15,7 +16,10 @@ const DropdownDot = ({ data }) => {
     const usersData = useSelector(state => state.userSlice)
     const playlists = useSelector(state => state.playlistSlice.list);
     const playlist = usersData.isLogged ? playlists.filter((element) => element.userId === (usersData.userLogged._id)) : '';
+    const { getAccessTokenSilently } = useAuth0();
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
 
+    const token = getAccessTokenSilently();
 
     const addToPlaylist = (song, playlist) => {
         const selectedPlaylist = playlist.tracks.find((e) => e._id === song._id)
@@ -28,12 +32,24 @@ const DropdownDot = ({ data }) => {
                 ...p,
                 tracks: [...playlist.tracks, song]
             } : p)
+            console.log(playlistAdded);
+            // TODAS LAS PLAYLIST -> PLAYLISTOTAL
             dispatch(addSongToPlaylist(playlistTotal))
-            fetchAddPlaylist(playlistAdded)
+            fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         } else {
-            console.log("ya la tienes")
-            //add two buttons for add again and don't do i
-            //quit from this playlist 
+            const removeTrackPlaylist = playlist.tracks.filter((e) => e._id !== song._id)
+
+            const playlistAdded = {
+                ...playlist,
+                'tracks': removeTrackPlaylist
+            }
+
+            const playlistTotal = playlists.map(p => playlistAdded._id === p._id ? {
+                    ...p,
+                    tracks: removeTrackPlaylist
+                } : p)
+            dispatch(addSongToPlaylist(playlistTotal))
+            fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         }
     }
 

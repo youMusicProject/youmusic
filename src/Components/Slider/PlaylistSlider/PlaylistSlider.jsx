@@ -32,11 +32,7 @@ export default function PlaylistSlider({ array, title, size, slidesPerView, img,
                                 />
                             </SwiperSlide>
                         )
-
                     })}
-
-
-
                 </div>
             </Swiper>
         </>

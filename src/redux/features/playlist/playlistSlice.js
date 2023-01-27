@@ -17,17 +17,13 @@ export const playlistSlice = createSlice({
         },
         addSongToPlaylist: (state, action) => {
             state.list = action.payload;
+        },
+        setPlaylistEdit: (state, action) => {
+            state.list = [...state.list, action.payload]
         }
     }
 })
 
-// setUserLikedPlaylist: (state, action) => {
-//     state.userLogged = {
-//         ...state.userLogged,
-//         'myplaylists': [...state.userLogged.myplaylists, action.payload]
-//     }
-// },
-
-export const { setPlaylistsList, createNewPlaylist, deletePlaylist, addSongToPlaylist } = playlistSlice.actions;
+export const { setPlaylistsList, createNewPlaylist, deletePlaylist, addSongToPlaylist, setPlaylistEdit } = playlistSlice.actions;
 
 export default playlistSlice.reducer;

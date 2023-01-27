@@ -21,6 +21,7 @@ export const fetchAddPlaylist = async (serverURL, newPlaylist, getAccessTokenSil
         console.log(error);
     }
 }
+
 export const fetchAddArtist = async (serverURL, newArtist, getAccessTokenSilently, dispatch) => {
     try {
         const token = await getAccessTokenSilently();

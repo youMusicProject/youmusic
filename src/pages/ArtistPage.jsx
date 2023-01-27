@@ -19,6 +19,7 @@ export const ArtistPage = () => {
     let listGenreArtist = [];
     artist.genres.map((genre) => listGenreArtist = [...listGenreArtist, tracks.list.filter((track) => track.genre === genre)]);
     const similarSongs = listGenreArtist.flat()
+    
 
     return (
         <>
