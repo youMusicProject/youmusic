@@ -24,7 +24,7 @@ const ModalEditedPlaylist = () => {
 
         try {
             const file = e.target.img.files
-            const src = await uploadCloudinary(file, "youmusic_img")
+            const src = await uploadCloudinary(file, "youmusic_img", "image")
 
             const newPlaylist = {
                 userId: usersData.userLogged._id,

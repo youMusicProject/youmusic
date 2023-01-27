@@ -35,13 +35,13 @@ export const Helper = () => {
     const checkUser = async () => {
         // PETICION AL BACKEND
         const token = await getAccessTokenSilently();
+        // console.log(token);
         const response = await fetch(`${serverUrl}/api/user/check/${user.email}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
         const responseData = await response.json()
-        // console.log(responseData.info[0]);
 
         // CONDICIONAL - EL BACK NOS DEVUELVE TRUE O FALSE
         if (!!responseData.info[0]) {
