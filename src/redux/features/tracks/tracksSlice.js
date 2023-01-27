@@ -8,10 +8,13 @@ export const trackSlice = createSlice({
     reducers: {
         setTracksList: (state, action) => {
             state.list = action.payload;
+        },
+        setAddTrack: (state, action) => {
+            state.list = [...state.list, action.payload]
         }
     }
 })
 
-export const { setTracksList } = trackSlice.actions;
+export const { setTracksList, setAddTrack } = trackSlice.actions;
 
 export default trackSlice.reducer;

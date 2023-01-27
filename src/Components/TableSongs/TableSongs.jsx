@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BsFillPlayFill } from "react-icons/bs";
 import { setPlayer } from '../../helpers/functions/setPlayer';
 import { v4 as uuidv4 } from 'uuid';
-import { BsThreeDots } from "react-icons/bs";
 import DropdownDot from '../DropdownDot/DropdownDot';
 
 

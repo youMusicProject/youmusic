@@ -6,64 +6,89 @@ import Slider from '../Components/Slider/Slider';
 import { TopInfoArtist } from '../Components/TopInfo/TopInfoArtist/TopInfoArtist';
 import { v4 as uuidv4 } from 'uuid';
 import { TableSongs } from '../Components/TableSongs/TableSongs';
+import { useEffect, useState } from 'react';
 
 export const ArtistPage = () => {
     const { id } = useParams();
     const artists = useSelector(state => state.artistSlice);
-    const artist = artists.list.find((element) => element._id === id);
+
     const tracks = useSelector(state => state.trackSlice);
-    const tracksArtist = tracks.list.filter((track) => track.artist === artist.name);
     const albums = useSelector(state => state.albumSlice);
-    const album = albums.list.filter((album) => album.artist === artist.name);
 
-    let listGenreArtist = [];
-    artist.genres.map((genre) => listGenreArtist = [...listGenreArtist, tracks.list.filter((track) => track.genre === genre)]);
-    const similarSongs = listGenreArtist.flat()
-    
+    const [tracksArtist, settracksArtist] = useState([]);
+    const [artist, setartist] = useState();
+    const [album, setalbum] = useState([]);
 
+    //* Falta por hacer, necesitamos que primero carge el "artist y luego que mapee el genres"
+    const [listGenreArtist, setlistGenreArtist] = useState([]);
+    let similarSongs = listGenreArtist.flat();
+    // const generosArtista = artist.genres;
+    // artist.genres.map((genre) => listGenreArtist = [...listGenreArtist, tracks.list.filter((track) => track.genre === genre)]);
+
+
+    useEffect(() => {
+        setartist(artists.list.find((element) => element._id === id));
+    }, [artists]);
+
+    useEffect(() => {
+        if(!!artist) {
+            settracksArtist(tracks.list.filter((track) => track.artist === artist.name));
+            setalbum(albums.list.filter((album) => album.artist === artist.name));
+        }
+
+        // !!artist ? artist.genres.map((genre) => {
+        //     setlistGenreArtist([...listGenreArtist, genre]);
+        // }) 
+        // : console.log("no esta cargado el artist");
+    }, [artist]);
+
+    useEffect(() => {
+        // console.log(similarSongs);
+        // console.log(listGenreArtist);
+    })
     return (
         <>
-            <TopInfoArtist data={artist} />
+            <TopInfoArtist data={!!artist ? artist : ""} />
 
             <TableSongs songList={tracksArtist} />
-            
+
             <div className='titleCards cardContainer'>
                 {
-                album.length > 0 &&
-                <div>
-                    <AlbumSlider
-                        slidesPerView={2}
-                        size='small'
-                        img='img__small'
-                        array={album}
-                        title='Artist albums'
-                        breakpoints={{
-                            600: {
-                                slidesPerView: 3,
-                                spaceBetween: 10,
-                            },
-                            768: {
-                                slidesPerView: 4,
-                                spaceBetween: 10,
-                            },
-                            992: {
-                                slidesPerView: 5,
-                                spaceBetween: 10,
-                            },
-                            1200: {
-                                slidesPerView: 7,
-                                spaceBetween: 10,
-                            },
-                            1400: {
-                                slidesPerView: 8,
-                                spaceBetween: 10,
-                            }
-                        }}
-                    />
-                </div>
+                    album.length > 0 &&
+                    <div>
+                        <AlbumSlider
+                            slidesPerView={2}
+                            size='small'
+                            img='img__small'
+                            array={album}
+                            title='Artist albums'
+                            breakpoints={{
+                                600: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 10,
+                                },
+                                992: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 10,
+                                },
+                                1200: {
+                                    slidesPerView: 7,
+                                    spaceBetween: 10,
+                                },
+                                1400: {
+                                    slidesPerView: 8,
+                                    spaceBetween: 10,
+                                }
+                            }}
+                        />
+                    </div>
                 }
                 {
-                similarSongs.length > 0 &&
+                    similarSongs.length > 0 &&
                     <div className="mt-2">
                         <Slider
                             slidesPerView={2}
@@ -99,7 +124,7 @@ export const ArtistPage = () => {
                 {
                     listGenreArtist.length > 0 && listGenreArtist.map((e) => {
                         if (e.length > 0) {
-                            const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
+                            // const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
 
                             return (
                                 <div key={uuidv4()} className="mt-2">
@@ -108,7 +133,7 @@ export const ArtistPage = () => {
                                         size='small'
                                         img='img__small'
                                         array={e}
-                                        title={capitalizeGenre}
+                                        title='Genres'
                                         breakpoints={{
                                             600: {
                                                 slidesPerView: 3,

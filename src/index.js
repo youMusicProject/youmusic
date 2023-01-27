@@ -15,24 +15,10 @@ root.render(
 
     <BrowserRouter >
         <Provider store={store}>
-
-            <ProviderWithHistory
-
-            >
+            <ProviderWithHistory >
                 <App />
-
             </ProviderWithHistory>
-
         </Provider>
-
-
     </BrowserRouter>
-
-
-
-
-
-
-
 
 );
