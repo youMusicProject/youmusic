@@ -9,9 +9,9 @@ import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlayli
 import { addSongToPlaylist, setPlaylistEdit } from '../../redux/features/playlist/playlistSlice';
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchEdit } from '../../Api/putApi';
+import { useState } from 'react';
 
 const DropdownDot = ({ data }) => {
-
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.userSlice)
     const playlists = useSelector(state => state.playlistSlice.list);
@@ -20,6 +20,24 @@ const DropdownDot = ({ data }) => {
     const serverUrl = process.env.REACT_APP_SERVER_URL;
 
     const token = getAccessTokenSilently();
+    
+    // if (playlists.map((e) => e.tracks.find((e) => e._id === data._id))) {
+    //     return setHelper(true)
+    // } else {
+    //     return setHelper(false)
+    // }
+
+    // const haveThisSong = playlists.map((e) => e.tracks.find((e) => e._id === data._id))
+    
+    // console.log(haveThisSong.map((e) => {
+    //     if (e !== undefined) {
+    //         console.log("hola")
+    //     } else {
+    //         console.log("adios");
+    //     }
+    // }))
+    
+    // console.log(checkPlaylistTrack.map(e => console.log(e)));
 
     const addToPlaylist = (song, playlist) => {
         const selectedPlaylist = playlist.tracks.find((e) => e._id === song._id)
@@ -32,13 +50,11 @@ const DropdownDot = ({ data }) => {
                 ...p,
                 tracks: [...playlist.tracks, song]
             } : p)
-            console.log(playlistAdded);
             // TODAS LAS PLAYLIST -> PLAYLISTOTAL
             dispatch(addSongToPlaylist(playlistTotal))
             fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         } else {
             const removeTrackPlaylist = playlist.tracks.filter((e) => e._id !== song._id)
-
             const playlistAdded = {
                 ...playlist,
                 'tracks': removeTrackPlaylist
@@ -47,11 +63,13 @@ const DropdownDot = ({ data }) => {
             const playlistTotal = playlists.map(p => playlistAdded._id === p._id ? {
                     ...p,
                     tracks: removeTrackPlaylist
-                } : p)
+            } : p)
             dispatch(addSongToPlaylist(playlistTotal))
             fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         }
     }
+
+    // const prueba = playlist.tracks.find((e) => e._id === data._id)
 
     return (
         <>
@@ -63,12 +81,13 @@ const DropdownDot = ({ data }) => {
                 <Dropdown.Item > <ModalEditedPlaylist /> </Dropdown.Item>
 
                 <NavDropdown.Divider />
-                {usersData.isLogged &&
+                {usersData.isLogged && 
                     playlist.map((p) => {
+                        const songExist = p.tracks.find((track) => track._id === data._id)
                         return (
-
-                            <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1" > {p.name} </NavDropdown.Item>
-
+                                !!songExist ? 
+                                <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1"> Delete song </NavDropdown.Item> :
+                                <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1" > {p.name} </NavDropdown.Item>
                         )
                     })
                 }
