@@ -21,24 +21,6 @@ const DropdownDot = ({ data }) => {
 
     const token = getAccessTokenSilently();
     
-    // if (playlists.map((e) => e.tracks.find((e) => e._id === data._id))) {
-    //     return setHelper(true)
-    // } else {
-    //     return setHelper(false)
-    // }
-
-    // const haveThisSong = playlists.map((e) => e.tracks.find((e) => e._id === data._id))
-    
-    // console.log(haveThisSong.map((e) => {
-    //     if (e !== undefined) {
-    //         console.log("hola")
-    //     } else {
-    //         console.log("adios");
-    //     }
-    // }))
-    
-    // console.log(checkPlaylistTrack.map(e => console.log(e)));
-
     const addToPlaylist = (song, playlist) => {
         const selectedPlaylist = playlist.tracks.find((e) => e._id === song._id)
         if (!selectedPlaylist) {
@@ -68,8 +50,6 @@ const DropdownDot = ({ data }) => {
             fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         }
     }
-
-    // const prueba = playlist.tracks.find((e) => e._id === data._id)
 
     return (
         <>
