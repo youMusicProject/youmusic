@@ -6,7 +6,6 @@ import PlaylistCard from "../../Card/PlaylistCard/PlaylistCard";
 
 export default function PlaylistSlider({ array, title, size, slidesPerView, img, breakpoints }) {
 
-
     return (
         <>
             <h2 className="titleCards">{title}</h2>

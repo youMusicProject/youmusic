@@ -13,7 +13,7 @@ export const playlistSlice = createSlice({
             state.list = [...state.list, action.payload];
         },
         deletePlaylist: (state, action) => {
-            state.list = [...state.list, action.payload];
+            state.list = action.payload;
         },
         addSongToPlaylist: (state, action) => {
             state.list = action.payload;

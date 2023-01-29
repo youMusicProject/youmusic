@@ -13,7 +13,6 @@ const PlaylistCard = ({ data, size, img }) => {
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     
-
     const openSong = (data) => {
         navigate(`/playlist/${data._id}`)
     }
@@ -28,7 +27,7 @@ const PlaylistCard = ({ data, size, img }) => {
             }
             <button className='btn btnplay' onClick={() => setPlayer(data.tracks, dispatch, usersData)}><BsFillPlayCircleFill /></button>
 
-            <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt='img' />
+            <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt={data.name} />
 
             <div className="card-text imghover card-body mt-2">
                 <h5 className="card-title">{data.name}</h5>

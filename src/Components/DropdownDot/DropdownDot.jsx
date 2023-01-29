@@ -9,7 +9,6 @@ import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlayli
 import { addSongToPlaylist, setPlaylistEdit } from '../../redux/features/playlist/playlistSlice';
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchEdit } from '../../Api/putApi';
-import { useState } from 'react';
 
 const DropdownDot = ({ data }) => {
     const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const DropdownDot = ({ data }) => {
                 ...p,
                 tracks: [...playlist.tracks, song]
             } : p)
-            // TODAS LAS PLAYLIST -> PLAYLISTOTAL
             dispatch(addSongToPlaylist(playlistTotal))
             fetchEdit("playlist", serverUrl, playlistAdded, token, dispatch, setPlaylistEdit)
         } else {

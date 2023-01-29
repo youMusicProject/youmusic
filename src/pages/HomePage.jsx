@@ -11,10 +11,10 @@ import Spinner from 'react-bootstrap/Spinner';
 
 const HomePage = () => {
   const userData = useSelector(state => state.userSlice);
+  const playlists = useSelector(state => state.playlistSlice);
   const albums = useSelector(state => state.albumSlice);
   const tracks = useSelector(state => state.trackSlice);
   const artists = useSelector(state => state.artistSlice);
-  const playlists = useSelector(state => state.playlistSlice);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";
@@ -36,6 +36,7 @@ const HomePage = () => {
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
+  
   return (
     <>
       <div className="cardContainer">

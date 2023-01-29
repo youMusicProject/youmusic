@@ -16,7 +16,6 @@ export const fetchAddPlaylist = async (serverURL, newPlaylist, getAccessTokenSil
             }
         })
         const data = await response.json();
-
         dispatch(createNewPlaylist(data.info))
     } catch (error) {
         console.log(error);

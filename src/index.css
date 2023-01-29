@@ -179,3 +179,16 @@ table th {
         white-space: nowrap;
         overflow: hidden;
 }
+
+/* <ASIDE> */
+/* li-container-myPlaylist */
+.li-container {
+        display: flex;
+        flex-direction: row;
+}
+
+/* li--playlist__name */
+.li--playlist__name {
+        flex: auto;
+}
+/* </ASIDE> */
