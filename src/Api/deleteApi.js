@@ -9,8 +9,5 @@ export const fetchDelete = async (action, serverUrl, deleteAction, token, dispat
         },
     });
     const data = await response.json();
-    // if (data) {
-    //     dispatch(setDelete(deleteAction));
-    // }
     return data.info;
 };
