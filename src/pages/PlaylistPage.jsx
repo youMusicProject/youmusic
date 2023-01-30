@@ -22,8 +22,6 @@ export const PlaylistPage = () => {
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const { getAccessTokenSilently } = useAuth0();
     const info = playlist.tracks;
-    console.log(playlist.userId);
-    console.log(usersData.userLogged._id);
 
     const removePlaylist = () => {
         try {
