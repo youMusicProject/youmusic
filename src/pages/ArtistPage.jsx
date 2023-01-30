@@ -1,4 +1,3 @@
-import { BsFillPlayFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import AlbumSlider from '../Components/Slider/AlbumSlider/AlbumSlider';
