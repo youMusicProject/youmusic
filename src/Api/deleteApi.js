@@ -12,4 +12,5 @@ export const fetchDelete = async (action, serverUrl, deleteAction, token, dispat
     // if (data) {
     //     dispatch(setDelete(deleteAction));
     // }
+    return data.info;
 };

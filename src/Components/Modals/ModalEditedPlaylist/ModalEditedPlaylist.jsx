@@ -34,7 +34,7 @@ const ModalEditedPlaylist = () => {
                 publicAccessible: e.target.public.value,
             }
 
-            fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch)
+            fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch);
             setShow(false);
         } catch (error) {
             console.log(error);

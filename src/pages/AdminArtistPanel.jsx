@@ -5,9 +5,15 @@ import { UploadSong } from '../Components/Modals/UploadSong/UploadSong';
 import { setPlayer } from '../helpers/functions/setPlayer';
 import { BsFillPlayFill } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
+import ModalEditedPlaylist from '../Components/Modals/ModalEditOwnSong/ModalEditOwnSong';
+import { useAuth0 } from '@auth0/auth0-react';
+import { setTracksList } from '../redux/features/tracks/tracksSlice';
+import { fetchDelete } from '../Api/deleteApi';
 
 export const AdminArtistPanel = () => {
     // Buscar el artista con el id del user, mostrar sus propiedades
+    const { getAccessTokenSilently } = useAuth0();
+    const serverUrl = process.env.REACT_APP_SERVER_URL;
     const dispatch = useDispatch();
 
     const usersData = useSelector(state => state.userSlice);
@@ -17,7 +23,16 @@ export const AdminArtistPanel = () => {
     const artist = artistRedux.find(e => usersData.userLogged._id === e.userId);
     const song_artist = tracks.filter(e => artist.name === e.artist);
 
+    
+const deleteSong = async (track) => {
+    const token = getAccessTokenSilently();
+    
+    // Hacer una condicion preguntando al usuario si realmente quiere borrar la cancion
+    const data = await fetchDelete("track", serverUrl, track, token, dispatch, setTracksList);
 
+    const tracks_update= tracks.filter(track => track._id !== data._id);
+    dispatch(setTracksList(tracks_update))
+}
 
     return (
         <div className="container mb-5">
@@ -65,11 +80,9 @@ export const AdminArtistPanel = () => {
                                                     <td>{track.artist}</td>
                                                     <td>{track.genre}</td>
                                                     <td>
-                                                        <button type="button" className="btn btn-outline-success btn-sm px-3">
-                                                            <AiOutlineEdit />
-                                                        </button>
+                                                        <ModalEditedPlaylist track={track} tracks={tracks} />
                                                         {' '}
-                                                        <button type="button" className="btn btn-outline-danger btn-sm px-3">
+                                                        <button onClick={() => deleteSong(track)} type="button" className="btn btn-outline-danger btn-sm px-3">
                                                             <AiFillDelete />
                                                         </button>
                                                     </td>

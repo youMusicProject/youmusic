@@ -44,7 +44,7 @@ export const ModalEdit = () => {
                     profilePicture: src
                 }
             }
-            fetchEdit("user", serverUrl, editUser, token, dispatch, setUserEdit)
+            fetchEdit("user", serverUrl, editUser, token, dispatch, setUserEdit);
         } catch (error) {
             console.log(error);
         }

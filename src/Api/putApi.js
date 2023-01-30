@@ -15,4 +15,21 @@ export const fetchEdit = async (action, serverUrl, editAction, token, dispatch, 
         dispatch(setEdit(editAction));
     }
 };
+export const fetchEditSong = async (action, serverUrl, editAction, token, dispatch, setTracksList, tracks) => {
+    const tokenHelper = await token
+    const response = await fetch(`${serverUrl}/api/${action}/edit/${editAction._id}`, {
+        method: "PUT",
+        body: JSON.stringify(editAction),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenHelper}`,
+        },
+    });
+    const data = await response.json();
+    console.log(data);
+    //! hacer el dispatch
+    const allTracks = tracks.map(e => e._id === data.info._id ? data.info : e);
+    console.log(allTracks);
+    dispatch(setTracksList(allTracks));
+};
 
