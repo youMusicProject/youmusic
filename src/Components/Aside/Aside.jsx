@@ -4,37 +4,37 @@ import { AiOutlineHome, AiOutlinePlayCircle } from "react-icons/ai";
 import { GiCheckboxTree, GiMedallist } from "react-icons/gi";
 import { IoIosRadio } from "react-icons/io";
 import { BsFileEarmarkMusicFill } from "react-icons/bs";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlaylist';
 import Search from '../Search/Search';
-import { useDispatch, useSelector } from 'react-redux';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import { NavDropdown } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchDelete } from '../../Api/deleteApi';
-import { useAuth0 } from '@auth0/auth0-react';
-import { deletePlaylist } from '../../redux/features/playlist/playlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+// import DropdownButton from 'react-bootstrap/DropdownButton';
+// import { NavDropdown } from 'react-bootstrap';
+// import { fetchDelete } from '../../Api/deleteApi';
+// import { useAuth0 } from '@auth0/auth0-react';
+// import { deletePlaylist } from '../../redux/features/playlist/playlistSlice';
+// import { BiDotsVerticalRounded } from "react-icons/bi";
 
 export const Aside = () => {
-    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get("filter") ?? "";
     const userData = useSelector(state => state.userSlice);
     const playlists = useSelector(state => state.playlistSlice);
-    const { getAccessTokenSilently } = useAuth0();
-    const serverUrl = process.env.REACT_APP_SERVER_URL;
-    const token = getAccessTokenSilently();
-    // const openPlaylist = (data) => {
-    //     navigate(`/playlist/${data._id}`)
-    // }
+    // const dispatch = useDispatch()
+    // const { getAccessTokenSilently } = useAuth0();
+    // const serverUrl = process.env.REACT_APP_SERVER_URL;
+    // const token = getAccessTokenSilently();
 
-    const removePlaylist = (playlist) => {
-        const playlistToRemove = playlists.list.filter((p) => p._id !== playlist._id)
-        console.log(playlistToRemove);
-        dispatch(deletePlaylist(playlistToRemove))
-        fetchDelete("playlist", serverUrl, playlist, token, dispatch, deletePlaylist)
-    }
+    // const removePlaylist = (playlist) => {
+    //     try {
+    //         const playlistToRemove = playlists.list.filter((p) => p._id !== playlist._id)
+    //         fetchDelete("playlist", serverUrl, playlist, token, dispatch, deletePlaylist)
+    //         dispatch(deletePlaylist(playlistToRemove))
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
     
     const handleFilter = (e) => {
         setSearchParams({ filter: e.target.value });
@@ -70,15 +70,16 @@ export const Aside = () => {
                             userData.userLogged &&
                             playlists.list.map((p) => {
                                 if (p.userId === userData.userLogged._id) {
+                                    const linkPlaylist = `/playlist/${p._id}`
                                     return (
                                         <li key={uuidv4()} className='li-container'>
-                                            {/* <Link to={openPlaylist(p)}> */}
                                                 <div className='li--playlist__name'>
-                                                    <BsFileEarmarkMusicFill className='me-1' /> {p.name}
+                                                    <Link to={linkPlaylist}>
+                                                        <BsFileEarmarkMusicFill className='me-1' /> {p.name}
+                                                    </Link>
                                                 </div>
-                                            {/* </Link> */}
                                             
-                                            <div className='li--playlist__dots'>
+                                            {/* <div className='li--playlist__dots'>
                                                 <DropdownButton 
                                                     className='my-dropdown-toggle' 
                                                     title=<BiDotsVerticalRounded/>
@@ -86,7 +87,7 @@ export const Aside = () => {
                                                     <NavDropdown.Item key={uuidv4()} onClick={() => removePlaylist(p)}> Delete playlist</NavDropdown.Item>
 
                                                 </DropdownButton>
-                                            </div>
+                                            </div> */}
                                         </li>
                                     )
                                 }
