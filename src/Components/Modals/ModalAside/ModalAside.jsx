@@ -21,6 +21,7 @@ const ModalAside = () => {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
     const usersData = useSelector(state => state.userSlice);
+    const userData = useSelector(state => state.userSlice);
 
     function handleShow(v) {
         setFullscreen(v);
@@ -56,7 +57,9 @@ const ModalAside = () => {
                             <li onClick={() => setShow(false)}><Link to='/'><AiOutlinePlayCircle className='me-1' /> Listen</Link></li>
                             <li onClick={() => setShow(false)}><Link to='/explore'><GiCheckboxTree className='me-1' /> Explore</Link></li>
                             <li onClick={() => setShow(false)}><Link to='/'><IoIosRadio className='me-1' /> Radio</Link></li>
-                            <li onClick={() => setShow(false)}><Link to='/'><GiMedallist className='me-1' /> Artist?</Link></li>
+                            {userData.isLogged ? userData.userLogged.role === "user" ? <li><Link to='/pre/artistpanel'><GiMedallist className='me-1' />Become Artist</Link></li>
+                                : <li><Link to='/artistpanel'><GiMedallist className='me-1' /> Artist Panel</Link></li>
+                                : <li><Link to='/'><GiMedallist className='me-1' /> Become Artist</Link></li>}
                         </ul>
                     </div>
                     <div className="">

@@ -23,16 +23,20 @@ export const AdminArtistPanel = () => {
     const artist = artistRedux.find(e => usersData.userLogged._id === e.userId);
     const song_artist = tracks.filter(e => artist.name === e.artist);
 
-    
-const deleteSong = async (track) => {
-    const token = getAccessTokenSilently();
-    
-    // Hacer una condicion preguntando al usuario si realmente quiere borrar la cancion
-    const data = await fetchDelete("track", serverUrl, track, token, dispatch, setTracksList);
 
-    const tracks_update= tracks.filter(track => track._id !== data._id);
-    dispatch(setTracksList(tracks_update))
-}
+    const deleteSong = async (track) => {
+        try {
+            const token = getAccessTokenSilently();
+
+            // Hacer una condicion preguntando al usuario si realmente quiere borrar la cancion
+            const data = await fetchDelete("track", serverUrl, track, token, dispatch, setTracksList);
+
+            const tracks_update = tracks.filter(track => track._id !== data._id);
+            dispatch(setTracksList(tracks_update))
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div className="container mb-5">

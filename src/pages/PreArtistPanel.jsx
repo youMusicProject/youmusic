@@ -16,7 +16,7 @@ export const PreArtistPanel = () => {
         e.preventDefault()
         try {
             const file = e.target.img.files
-            const src = await uploadCloudinary(file, "youmusic_img")
+            const src = await uploadCloudinary(file, "youmusic_img", "image")
             const newArtist = {
                 userId: usersData.userLogged._id,
                 name: e.target.artistname.value,

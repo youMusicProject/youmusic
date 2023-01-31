@@ -79,13 +79,13 @@ export const Aside = () => {
                                             {/* </Link> */}
                                             
                                             <div className='li--playlist__dots'>
-                                                <DropdownButton 
+                                                {/* <DropdownButton 
                                                     className='my-dropdown-toggle' 
                                                     title=<BiDotsVerticalRounded/>
                                                     >
                                                     <NavDropdown.Item key={uuidv4()} onClick={() => removePlaylist(p)}> Delete playlist</NavDropdown.Item>
 
-                                                </DropdownButton>
+                                                </DropdownButton> */}
                                             </div>
                                         </li>
                                     )

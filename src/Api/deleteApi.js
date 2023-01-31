@@ -1,5 +1,5 @@
 
-export const fetchDelete = async (action, serverUrl, deleteAction, token, dispatch, setDelete) => {
+export const fetchDelete = async (action, serverUrl, deleteAction, token) => {
     const tokenHelper = await token
     const response = await fetch(`${serverUrl}/api/${action}/delete/${deleteAction._id}`, {
         method: "DELETE",
