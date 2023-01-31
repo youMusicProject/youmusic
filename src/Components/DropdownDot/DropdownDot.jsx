@@ -64,7 +64,7 @@ const DropdownDot = ({ data }) => {
                         const songExist = p.tracks.find((track) => track._id === data._id)
                         return (
                                 !!songExist ? 
-                                <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1"> Delete song </NavDropdown.Item> :
+                                <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1"> Delete from {p.name} </NavDropdown.Item> :
                                 <NavDropdown.Item key={uuidv4()} onClick={() => addToPlaylist(data, p)} eventKey="1" > {p.name} </NavDropdown.Item>
                         )
                     })
