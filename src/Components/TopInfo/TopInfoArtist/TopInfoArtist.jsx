@@ -21,16 +21,16 @@ export const TopInfoArtist = ({ data }) => {
     
     const followArtist = async (artist) => {
         const follow = {
-            _id: artist.userId,
+            userId: artist.userId,
             name: artist.name,
             thumbnail: artist.thumbnail
         }
         console.log(follow);
         
         const followers = {
-            _id: usersData.userLogged._id,
-            name: usersData.userLogged.userData.complete_name,
-            thumbnail: usersData.userLogged.userData.profilePicture
+            ...usersData.userLogged,
+            follows: [...usersData.userLogged.follows, follow ]
+            
         }
         console.log(followers);
         
@@ -46,8 +46,9 @@ export const TopInfoArtist = ({ data }) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        const data = response.json()
-        // FollowUser(data, usersData, dispatch, getAccessTokenSilently, serverUrl, artists, id)
+        const data = await response.json();
+        //! HACER EL DISPATCH al user
+        console.log(data);
     }
 
     return (
