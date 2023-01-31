@@ -6,7 +6,6 @@ import { BsFillPlayFill, BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
-import { FollowUser } from '../../../helpers/functions/FollowUser';
 import { useParams } from 'react-router-dom';
 
 export const TopInfoArtist = ({ data }) => {

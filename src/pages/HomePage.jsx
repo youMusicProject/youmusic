@@ -16,6 +16,7 @@ const HomePage = () => {
   const tracks = useSelector(state => state.trackSlice);
   const artists = useSelector(state => state.artistSlice);
 
+
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";
 
@@ -113,6 +114,19 @@ const HomePage = () => {
                   breakpoints={breakpoints_small}
                 />
               </div>
+              {
+                userData.userLogged ?
+                <div className="mx-2 titleCards">
+                <Slider
+                  slidesPerView={1}
+                  size='small'
+                  img='img__small'
+                  array={userData.userLogged.follows}
+                  title='Followed Artist'
+                  breakpoints={breakpoints_small}
+                />
+              </div> : ''
+              }
 
             </div>
         }
