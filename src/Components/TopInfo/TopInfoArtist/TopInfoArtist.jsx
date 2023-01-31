@@ -19,6 +19,8 @@ export const TopInfoArtist = ({ data }) => {
     const { id } = useParams();
     
     const followArtist = async (artist) => {
+        // CREO QUE SERIA MAS FACIL SI METIESEEMOS AQUI DIRECTAMENTE LOS FOLLOWERS? EN VEZ DE ESTAR EN EL USUARIO PORQUE UN USUARIO NO DEBERIA DE TENER FOLLOWERS
+        // SOLO LOS ARTISTAS, Y PARA ACCEDER A LA INFORMACION SUPONGO QUE ES LO MEJOR. NO SE MUY BIEN COMO RECOGERLA DESDE OTRO USUARIO
         const follow = {
             _id: artist._id,
             userId: artist.userId,
