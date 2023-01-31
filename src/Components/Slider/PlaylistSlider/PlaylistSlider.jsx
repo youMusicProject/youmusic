@@ -10,7 +10,7 @@ export default function PlaylistSlider({ array, title, size, slidesPerView, img,
         <>
             <h2 className="titleCards">{title}</h2>
             <Swiper
-                loop= 'true'
+                // loop= 'true'
                 slidesPerView={slidesPerView}
                 breakpoints={breakpoints}
                 modules={[Pagination]}

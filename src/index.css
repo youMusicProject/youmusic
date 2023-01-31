@@ -192,3 +192,9 @@ table th {
         flex: auto;
 }
 /* </ASIDE> */
+
+.profile__container--follows {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}

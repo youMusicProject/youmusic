@@ -24,14 +24,12 @@ export const TopInfoArtist = ({ data }) => {
             name: artist.name,
             thumbnail: artist.thumbnail
         }
-        console.log(follow);
         
         const followers = {
             ...usersData.userLogged,
             follows: [...usersData.userLogged.follows, follow ]
             
         }
-        console.log(followers);
         
         const token = await getAccessTokenSilently()
         const response = await fetch(`${serverUrl}/api/user/follow/${followers._id}`, {
@@ -60,8 +58,8 @@ export const TopInfoArtist = ({ data }) => {
                                 <img src={data.thumbnail} className='rounded-circle' alt="user" />
                             </div>
                             <h3 className="m-b-0">{data.name}</h3>
-                            {/* PONER FOLLOWS Y FOLLOWERS */}
-                            {/* <p className='icon__popularity--star'>{getRandomInt(100)}/100 <AiFillStar /></p> */}
+                            {/* HAY QUE BUSCAR DENTRO DEL USUARIO DEL ARTISTA Y TRAER SU CANTIDAD DE FOLLOWERS Y HACERLE UN .LENGTH */}
+                            <p>Followers: {}</p>
                         </div>
                         <div className='containerButton--songpage'>
                             <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(tracksArtist, dispatch, usersData)} ><BsFillPlayFill /></button>

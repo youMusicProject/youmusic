@@ -7,7 +7,7 @@ export const TopProfile = () => {
 
     const userData = useSelector(state => state.userSlice);
     const user = userData.userLogged;
-
+console.log(user);
     return (
         <>
             <div className="mx-0 ">
@@ -21,9 +21,16 @@ export const TopProfile = () => {
                                 <p>{user.userData.first_name} {user.userData.last_name}</p>
                                 <p>{user.userData.email}</p>
                             </div>
+                            <div className='profile__container--follows'>
                             {/* <button href="#" type="submit" className="btn btn-primary profile">Edit</button> */}
-                            <ModalEdit />
+                                <p>Follows: {user.follows.length}</p>
+                                <ModalEdit />
+                                {
+                                    user.followers.length > 0 ?
+                                    <p>Followers: {user.followers.length}</p> : ''
+                                }
                             {/* <a className="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a> */}
+                            </div>
                         </div>
                     </div>
                 </div>
