@@ -13,7 +13,6 @@ export default function AlbumSlider({ array, title, size, slidesPerView, img, br
         <>
             <h2>{title}</h2>
             <Swiper
-                loop= 'true'
                 slidesPerView={slidesPerView}
                 // pagination={{
                 //     clickable: true,

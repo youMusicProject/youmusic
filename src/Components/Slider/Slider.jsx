@@ -16,7 +16,7 @@ export default function Slider({ array, title, size, slidesPerView, img, breakpo
             <Swiper
                 slidesPerView={slidesPerView}
                 spaceBetween={12}
-                loop= 'true'
+                // loop= 'true'
                 // pagination={{
                 //     clickable: true,
                 // }}
