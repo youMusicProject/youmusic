@@ -11,7 +11,7 @@ export default function ArtistSlider({ array, title, size, slidesPerView, img, b
         <>
             <h2>{title}</h2>
             <Swiper
-                loop= 'true'
+                // loop= 'true'
                 slidesPerView={slidesPerView}
                 breakpoints={breakpoints}
                 modules={[Pagination]}

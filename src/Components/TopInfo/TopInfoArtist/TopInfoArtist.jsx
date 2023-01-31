@@ -20,6 +20,7 @@ export const TopInfoArtist = ({ data }) => {
     
     const followArtist = async (artist) => {
         const follow = {
+            _id: artist._id,
             userId: artist.userId,
             name: artist.name,
             thumbnail: artist.thumbnail

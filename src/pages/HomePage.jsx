@@ -37,7 +37,7 @@ const HomePage = () => {
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
-  
+
   return (
     <>
       <div className="cardContainer">
@@ -117,15 +117,15 @@ const HomePage = () => {
               {
                 userData.userLogged ?
                 <div className="mx-2 titleCards">
-                <Slider
-                  slidesPerView={1}
-                  size='small'
-                  img='img__small'
-                  array={userData.userLogged.follows}
-                  title='Followed Artist'
-                  breakpoints={breakpoints_small}
-                />
-              </div> : ''
+                  <ArtistSlider
+                    slidesPerView={2}
+                    size='small'
+                    img='img__small img__small--circle'
+                    array={userData.userLogged.follows}
+                    title='Followed Artist'
+                    breakpoints={breakpoints_small}
+                  />
+                </div> : ''
               }
 
             </div>
