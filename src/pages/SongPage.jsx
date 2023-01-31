@@ -19,6 +19,7 @@ const SongPage = () => {
     const dispatch = useDispatch();
     const genreSong = tracks.list.filter((track) => track.genre === song.genre);
     const listSameGenre = genreSong.filter((track) => track._id !== song._id)
+    console.log(listSameGenre.length);
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const { getAccessTokenSilently } = useAuth0();
 

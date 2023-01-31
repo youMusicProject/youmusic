@@ -78,16 +78,6 @@ export const Aside = () => {
                                                         <BsFileEarmarkMusicFill className='me-1' /> {p.name}
                                                     </Link>
                                                 </div>
-                                            
-                                            <div className='li--playlist__dots'>
-                                                <DropdownButton 
-                                                    className='my-dropdown-toggle' 
-                                                    title=<BiDotsVerticalRounded/>
-                                                    >
-                                                    <NavDropdown.Item key={uuidv4()} onClick={() => removePlaylist(p)}> Delete playlist</NavDropdown.Item>
-
-                                                </DropdownButton>
-                                            </div>
                                         </li>
                                     )
                                 }

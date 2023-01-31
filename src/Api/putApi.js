@@ -26,10 +26,8 @@ export const fetchEditSong = async (action, serverUrl, editAction, token, dispat
         },
     });
     const data = await response.json();
-    console.log(data);
     //! hacer el dispatch
     const allTracks = tracks.map(e => e._id === data.info._id ? data.info : e);
-    console.log(allTracks);
     dispatch(setTracksList(allTracks));
 };
 

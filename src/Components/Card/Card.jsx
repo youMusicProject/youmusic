@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { setPlayer } from '../../helpers/functions/setPlayer';
 import { likedTrack } from '../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
+import { fetchEditSong } from '../../Api/putApi';
+import { setTracksList } from '../../redux/features/tracks/tracksSlice';
 
 
 const Card = ({ data, size, img }) => {
@@ -14,11 +16,26 @@ const Card = ({ data, size, img }) => {
     const navigate = useNavigate();
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
-
+    const tracks = useSelector(state => state.trackSlice.list);
+    
     const openSong = (data) => {
         navigate(`/song/${data._id}`)
     }
 
+    const playSong = async(data) => {
+        const token = await getAccessTokenSilently();
+        try {
+            const track_edited = {
+                ...data,
+                views: data.views + 1
+            }
+            await fetchEditSong("track", serverUrl, track_edited, token, dispatch, setTracksList, tracks);
+            
+            setPlayer([data], dispatch, usersData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
 
@@ -28,7 +45,7 @@ const Card = ({ data, size, img }) => {
                     usersData.userLogged.liked_tracks.find((like) => like._id === data._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
                 }</button> : ""
             }
-            <button className='btn btnplay' onClick={() => setPlayer([data], dispatch, usersData)}><BsFillPlayCircleFill /></button>
+            <button className='btn btnplay' onClick={() => { playSong(data) }}><BsFillPlayCircleFill /></button>
 
             <img onClick={() => openSong(data)} className={img} src={data.thumbnail} alt='img' />
 
