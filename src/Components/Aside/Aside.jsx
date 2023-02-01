@@ -8,12 +8,6 @@ import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlayli
 import Search from '../Search/Search';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-// import { NavDropdown } from 'react-bootstrap';
-// import { fetchDelete } from '../../Api/deleteApi';
-// import { useAuth0 } from '@auth0/auth0-react';
-// import { deletePlaylist } from '../../redux/features/playlist/playlistSlice';
-// import { BiDotsVerticalRounded } from "react-icons/bi";
 
 export const Aside = () => {
     const navigate = useNavigate();
@@ -21,20 +15,6 @@ export const Aside = () => {
     const filter = searchParams.get("filter") ?? "";
     const userData = useSelector(state => state.userSlice);
     const playlists = useSelector(state => state.playlistSlice);
-    // const dispatch = useDispatch()
-    // const { getAccessTokenSilently } = useAuth0();
-    // const serverUrl = process.env.REACT_APP_SERVER_URL;
-    // const token = getAccessTokenSilently();
-
-    // const removePlaylist = (playlist) => {
-    //     try {
-    //         const playlistToRemove = playlists.list.filter((p) => p._id !== playlist._id)
-    //         fetchDelete("playlist", serverUrl, playlist, token, dispatch, deletePlaylist)
-    //         dispatch(deletePlaylist(playlistToRemove))
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
     
     const handleFilter = (e) => {
         setSearchParams({ filter: e.target.value });
