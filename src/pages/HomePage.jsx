@@ -8,6 +8,8 @@ import SearchPage from "./SearchPage";
 import { useSearchParams } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import Spinner from 'react-bootstrap/Spinner';
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const HomePage = () => {
   const userData = useSelector(state => state.userSlice);
@@ -30,14 +32,104 @@ const HomePage = () => {
     setSearchParams({ filter: e.target.value });
   }
 
+  const loader = () => {
+    return (
+      <div className="cardContainer">
+      {
+        <div className='imgbig'>
+            <SkeletonTheme baseColor="gray" highlightColor="#ddd">
+            <div className="card-text card-body mb-2">
+                <h5 className="card-title"><Skeleton /></h5>
+                <p className="card-text"><Skeleton /></p>
+            </div>
+            <div className="d-flex">
+                    <Skeleton width={562} height={320} variant="rect" />
+                    <Skeleton width={562} height={320} variant="rect" />
+            </div>
+
+            <div className="mx-2 titleCards">
+                <h5 className="card-title"><Skeleton /></h5>
+            </div>
+            <div className="d-flex">
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+            </div>
+
+            <div className="mx-2 titleCards">
+                <h5 className="card-title"><Skeleton /></h5>
+            </div>
+            <div className="d-flex">
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+            </div>
+            <div className="mx-2 titleCards">
+                <h5 className="card-title"><Skeleton /></h5>
+            </div>
+            <div className="d-flex">
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+            </div>
+            <div className="mx-2 titleCards">
+                <h5 className="card-title"><Skeleton /></h5>
+            </div>
+            <div className="d-flex">
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+                <Skeleton width={176} height={176} variant="rect" />
+            </div>
+            <div className="mx-2 titleCards">
+                <h5 className="card-title"><Skeleton /></h5>
+            </div>
+            <div className="d-flex">
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+                <Skeleton width={176} height={176} variant="circle" />
+            </div>
+            </SkeletonTheme>
+        </div>
+      }
+    </div>
+    )
+  }
 
   if (isLoading) {
     return (
-      <div className="grid-center mt-5">
-        <Spinner animation="grow" variant="primary" />
-      </div>
-    );
+      loader()
+
+      // <div className="grid-center mt-5">
+        // <Spinner animation="grow" variant="primary" />
+      // </div>
+    )
   }
+
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
@@ -46,7 +138,6 @@ const HomePage = () => {
   return (
     <>
       <div className="cardContainer">
-
         {
           filter ?
             <SearchPage
