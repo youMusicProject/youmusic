@@ -16,9 +16,13 @@ const HomePage = () => {
   const tracks = useSelector(state => state.trackSlice);
   const artists = useSelector(state => state.artistSlice);
 
+  const publicAccessiblePlaylist = playlists.list.filter((playlist) => playlist.publicAccessible === true)
 
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";
+  
+  const viewsQuantity = tracks.list.map((e) => e)
+  const trends = viewsQuantity.sort((a, b) => b.views - a.views)
 
   const { isLoading, error } = useAuth0();
 
@@ -37,6 +41,7 @@ const HomePage = () => {
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
+
 
   return (
     <>
@@ -62,15 +67,28 @@ const HomePage = () => {
               </div>
 
               <div className="mx-2 titleCards">
-                <PlaylistSlider
+                <Slider
                   slidesPerView={1}
                   size='small'
                   img='img__small'
-                  array={playlists.list}
-                  title='Playlists'
+                  array={trends}
+                  title='Trends'
                   breakpoints={breakpoints_small}
                 />
               </div>
+              {
+                
+                  <div className="mx-2 titleCards">
+                    <PlaylistSlider
+                      slidesPerView={1}
+                      size='small'
+                      img='img__small'
+                      array={publicAccessiblePlaylist}
+                      title='Playlists'
+                      breakpoints={breakpoints_small}
+                    />
+                  </div>
+              }
 
               <div className="mx-2 titleCards">
                 <ArtistSlider

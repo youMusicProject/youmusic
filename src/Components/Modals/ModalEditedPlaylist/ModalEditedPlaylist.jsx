@@ -77,8 +77,8 @@ const ModalEditedPlaylist = () => {
 
                                 <div className='form-floating mb-3'>
                                     <select name='public' id="publicPrivateOption">
-                                        <option defaultValue="public">Public</option>
-                                        <option value="private">Private</option>
+                                        <option defaultValue={true}>Public</option>
+                                        <option value={false}>Private</option>
                                     </select>
                                 </div>
 
