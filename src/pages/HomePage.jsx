@@ -16,7 +16,7 @@ const HomePage = () => {
   const tracks = useSelector(state => state.trackSlice);
   const artists = useSelector(state => state.artistSlice);
 
-  const publicAccessiblePlaylist = playlists.list.filter((playlist) => playlist.publicAccessible === true)
+  const publicAccessiblePlaylist = playlists.list.filter((playlist) => playlist.publicAccessible === "true")
 
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";

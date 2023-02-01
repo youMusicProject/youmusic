@@ -19,9 +19,9 @@ const ModalEditedPlaylist = () => {
         setFullscreen(v);
         setShow(true);
     }
+
     const functionPlaylistEdited = async (e) => {
         e.preventDefault();
-
         try {
             const file = e.target.img.files
             const src = await uploadCloudinary(file, "youmusic_img", "image")
@@ -33,7 +33,6 @@ const ModalEditedPlaylist = () => {
                 thumbnail: src,
                 publicAccessible: e.target.public.value,
             }
-
             fetchAddPlaylist(serverUrl, newPlaylist, getAccessTokenSilently, dispatch);
             setShow(false);
         } catch (error) {
@@ -77,19 +76,12 @@ const ModalEditedPlaylist = () => {
 
                                 <div className='form-floating mb-3'>
                                     <select name='public' id="publicPrivateOption">
-                                        <option defaultValue={true}>Public</option>
-                                        <option value={false}>Private</option>
+                                        <option value="true">Public</option>
+                                        <option value="false">Private</option>
                                     </select>
                                 </div>
 
                             </div>
-
-                            {/* <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" required />
-                                <label className="form-check-label" htmlFor="defaultCheck1">
-                                    Public
-                                </label>
-                            </div> */}
 
                             <h6 className='register__email--error mt-2'></h6>
                             <button className="mt-2 w-100 btn btn-color btn-lg" type="submit">Save</button>
