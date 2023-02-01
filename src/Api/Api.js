@@ -26,3 +26,18 @@ export const functionLogin = (e, userData, dispatch) => {
         
     } else { alert("Incorrect Password"); }
 }
+
+export const fetchgetUser = async (serverUrl, user, token) => {
+    try {
+        const response = await fetch(`${serverUrl}/api/user/check/${user.email}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const responseData = await response.json();
+        return responseData
+    } catch (error) {
+        console.log(error);
+    }
+}
+

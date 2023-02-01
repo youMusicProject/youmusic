@@ -3,7 +3,7 @@ import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
-import { setPlayer } from '../../helpers/functions/setPlayer';
+import { setPlayerAndFetch } from '../../helpers/functions/setPlayer';
 import { likedTrack } from '../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
 import { fetchEditSong } from '../../Api/putApi';
@@ -17,21 +17,16 @@ const Card = ({ data, size, img }) => {
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const tracks = useSelector(state => state.trackSlice.list);
-    
+
     const openSong = (data) => {
         navigate(`/song/${data._id}`)
     }
 
-    const playSong = async(data) => {
+    const playSong = async (data) => {
         const token = await getAccessTokenSilently();
+
         try {
-            const track_edited = {
-                ...data,
-                views: data.views + 1
-            }
-            await fetchEditSong("track", serverUrl, track_edited, token, dispatch, setTracksList, tracks);
-            
-            setPlayer([data], dispatch, usersData);
+            setPlayerAndFetch(data, dispatch, usersData, "track", serverUrl, token, setTracksList, tracks)
         } catch (error) {
             console.log(error);
         }

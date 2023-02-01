@@ -4,7 +4,7 @@ import { createNewPlaylist } from "../redux/features/playlist/playlistSlice";
 import { setAddTrack } from "../redux/features/tracks/tracksSlice";
 import { setUserLogged } from "../redux/features/user/userSlice";
 
-export const fetchAddPlaylist = async (serverURL, newPlaylist, getAccessTokenSilently, dispatch, ) => {
+export const fetchAddPlaylist = async (serverURL, newPlaylist, getAccessTokenSilently, dispatch,) => {
     try {
         const token = await getAccessTokenSilently();
         const response = await fetch(`${serverURL}/api/playlist/new`, {
@@ -54,6 +54,27 @@ export const fetchAddTrack = async (serverURL, newTrack, getAccessTokenSilently,
         })
         const data = await response.json();
         dispatch(setAddTrack(data.info));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchPostNewUser = async (serverUrl, $user, token) => {
+    try {
+
+        const request = await fetch(`${serverUrl}/api/user/new`, {
+            method: "POST",
+            body: JSON.stringify($user),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const data = await request.json()
+        console.log(data);
+        
+        return data
+
     } catch (error) {
         console.log(error);
     }

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 // redux
-import { fetchGet } from "../../Api/Api";
+import { fetchGet, fetchgetUser } from "../../Api/Api";
 import { useDispatch } from 'react-redux';
 import { setTracksList } from "../../redux/features/tracks/tracksSlice";
 import { setArtistsList } from "../../redux/features/artists/artistsSlice";
@@ -11,6 +11,7 @@ import { setGenresList } from "../../redux/features/genres/genresSlice";
 
 import { setUserLogged } from "../../redux/features/user/userSlice";
 import { useAuth0 } from '@auth0/auth0-react';
+import { fetchPostNewUser } from "../../Api/postApi";
 
 export const Helper = () => {
     const dispatch = useDispatch();
@@ -36,17 +37,11 @@ export const Helper = () => {
         // PETICION AL BACKEND
         const token = await getAccessTokenSilently();
         // console.log(token);
-        const response = await fetch(`${serverUrl}/api/user/check/${user.email}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-        const responseData = await response.json()
-
+        const fetchGetUser = await fetchgetUser(serverUrl, user, token);
         // CONDICIONAL - EL BACK NOS DEVUELVE TRUE O FALSE
-        if (!!responseData.info[0]) {
+        if (!!fetchGetUser.info[0]) {
             console.log('El usuario existe en la bbdd');
-            dispatch(setUserLogged(responseData.info[0]));
+            dispatch(setUserLogged(fetchGetUser.info[0]));
         } else {
             // SI NO EXISTE, CREAR USER CON POST
             console.log('El usuario no existe en la bbdd');
@@ -62,19 +57,8 @@ export const Helper = () => {
                 }
             }
 
-            const request = await fetch(`${serverUrl}/api/user/new`, {
-                method: "POST",
-                body: JSON.stringify($user),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            const data = await request.json()
-            console.log(data);
-            dispatch(setUserLogged(data.info));
-            // setuserLoged(data.post);
-            // setMessage(data.mensaje);
+            const fetchNewUser = await fetchPostNewUser(serverUrl, $user, token);
+            dispatch(setUserLogged(fetchNewUser.info));
         }
     }
 }
