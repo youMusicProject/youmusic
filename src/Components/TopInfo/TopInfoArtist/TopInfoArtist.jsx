@@ -17,40 +17,65 @@ export const TopInfoArtist = ({ data }) => {
     const { getAccessTokenSilently } = useAuth0();
     const artists = useSelector(state => state.artistSlice);
     const { id } = useParams();
-    
+
     const followArtist = async (artist) => {
         // CREO QUE SERIA MAS FACIL SI METIESEEMOS AQUI DIRECTAMENTE LOS FOLLOWERS? EN VEZ DE ESTAR EN EL USUARIO PORQUE UN USUARIO NO DEBERIA DE TENER FOLLOWERS
         // SOLO LOS ARTISTAS, Y PARA ACCEDER A LA INFORMACION SUPONGO QUE ES LO MEJOR. NO SE MUY BIEN COMO RECOGERLA DESDE OTRO USUARIO
-        const follow = {
-            _id: artist._id,
-            userId: artist.userId,
-            name: artist.name,
-            thumbnail: artist.thumbnail
-        }
-        
-        const followers = {
-            ...usersData.userLogged,
-            follows: [...usersData.userLogged.follows, follow ]
-            
-        }
-        
-        const token = await getAccessTokenSilently()
-        const response = await fetch(`${serverUrl}/api/user/follow/${followers._id}`, {
-            method: "PUT",
-            body: JSON.stringify({
-                follow: follow,
-                followers: followers
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        const data = await response.json();
-        //! HACER EL DISPATCH al user
-        console.log(data);
-    }
+        try {
+            const token = await getAccessTokenSilently()
+            const validate = usersData.userLogged.follows.find((artist) => artist.name === data.name);
+            if (!!validate) {
+                console.log("dejar de seguir");
+                // ID del usuario logeado (el que da unfollow)
+                // ID del artista
+                const response = await fetch(`${serverUrl}/api/user/unfollow`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        idLogged: usersData.userLogged._id,
+                        idArtist: artist._id,
+                        artistUserId: artist.userId,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                //! HACER EL DISPATCH al user
+                // console.log(data);
+            } else {
+                const follow = {
+                    _id: artist._id,
+                    userId: artist.userId,
+                    name: artist.name,
+                    thumbnail: artist.thumbnail
+                }
 
+                const followers = {
+                    ...usersData.userLogged,
+                    follows: [...usersData.userLogged.follows, follow]
+
+                }
+
+                const response = await fetch(`${serverUrl}/api/user/follow/${followers._id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        follow: follow,
+                        followers: followers
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                //! HACER EL DISPATCH al user
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className="mx-0 song">
             <div className="">
@@ -62,7 +87,7 @@ export const TopInfoArtist = ({ data }) => {
                             </div>
                             <h3 className="m-b-0">{data.name}</h3>
                             {/* HAY QUE BUSCAR DENTRO DEL USUARIO DEL ARTISTA Y TRAER SU CANTIDAD DE FOLLOWERS Y HACERLE UN .LENGTH */}
-                            <p>Followers: {}</p>
+                            <p>Followers: { }</p>
                         </div>
                         <div className='containerButton--songpage'>
                             <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(tracksArtist, dispatch, usersData)} ><BsFillPlayFill /></button>
@@ -75,7 +100,7 @@ export const TopInfoArtist = ({ data }) => {
                             {
                                 usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => followArtist(data)}>
                                     {
-                                        usersData.userLogged.liked_artist.find((artist) => artist._id === data._id) ? <SlUserUnfollow /> : <SlUserFollow />
+                                        usersData.userLogged.follows.find((artist) => artist.name === data.name) ? <SlUserUnfollow /> : <SlUserFollow />
                                     }</button> : ""
                             }
                         </div>
