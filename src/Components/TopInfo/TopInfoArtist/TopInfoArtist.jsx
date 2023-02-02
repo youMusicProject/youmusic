@@ -41,8 +41,8 @@ export const TopInfoArtist = ({ data }) => {
                     },
                 });
                 const data = await response.json();
+                console.log(data);
                 //! HACER EL DISPATCH al user
-                // console.log(data);
             } else {
                 const follow = {
                     _id: artist._id,
