@@ -12,9 +12,11 @@ import ProviderWithHistory from './Components/Auth0/ProviderWithHistory';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
+    // ROUTES
     <BrowserRouter >
+         {/* REDUX PROVIDER */}
         <Provider store={store}>
+            {/* AUTH0 PROVIDER */}
             <ProviderWithHistory >
                 <App />
             </ProviderWithHistory>

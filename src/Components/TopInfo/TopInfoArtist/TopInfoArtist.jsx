@@ -86,7 +86,6 @@ export const TopInfoArtist = ({ data }) => {
                             </div>
                             <h3 className="m-b-0">{data.name}</h3>
                             {/* HAY QUE BUSCAR DENTRO DEL USUARIO DEL ARTISTA Y TRAER SU CANTIDAD DE FOLLOWERS Y HACERLE UN .LENGTH */}
-                            <p>Followers: { }</p>
                         </div>
                         <div className='containerButton--songpage'>
                             <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(tracksArtist, dispatch, usersData)} ><BsFillPlayFill /></button>
