@@ -7,6 +7,7 @@ import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
+import { setUserLogged } from '../../../redux/features/user/userSlice';
 
 export const TopInfoArtist = ({ data }) => {
     const dispatch = useDispatch();
@@ -41,8 +42,7 @@ export const TopInfoArtist = ({ data }) => {
                     },
                 });
                 const data = await response.json();
-                //! HACER EL DISPATCH al user
-                // console.log(data);
+                dispatch(setUserLogged(data.user))
             } else {
                 const follow = {
                     _id: artist._id,
@@ -69,8 +69,7 @@ export const TopInfoArtist = ({ data }) => {
                     },
                 });
                 const data = await response.json();
-                //! HACER EL DISPATCH al user
-                console.log(data);
+                dispatch(setUserLogged(data.user))
             }
         } catch (error) {
             console.log(error);

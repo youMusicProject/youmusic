@@ -1,4 +1,3 @@
-import axios from "axios";
 import { setNewArtist } from "../redux/features/artists/artistsSlice";
 import { createNewPlaylist } from "../redux/features/playlist/playlistSlice";
 import { setAddTrack } from "../redux/features/tracks/tracksSlice";

@@ -3,14 +3,13 @@ import { Modal } from "react-bootstrap";
 import { MainBtn } from "../../Buttons/MainBtn/MainBtn";
 import { IoIosArrowBack } from "react-icons/io";
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export const ModalRecoveryPassword = () => {
     const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
     const usersData = useSelector(state => state.userSlice);
-    const dispatch = useDispatch();
 
     const handleShow = (v) => {
         setFullscreen(v);
@@ -27,10 +26,7 @@ export const ModalRecoveryPassword = () => {
         }
         // create interims...
         const interim = usersData.list.find(e => e.email === form_user.email);
-        const edit_user = {
-            ...interim,
-            password: form_user.editpassword,
-        }
+        
         // auth interim with form...
         if (interim && interim.question === form_user.question && interim.answer === form_user.answer) {
             setShow(false);

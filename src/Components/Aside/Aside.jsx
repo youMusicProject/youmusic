@@ -7,7 +7,7 @@ import { BsFileEarmarkMusicFill } from "react-icons/bs";
 import ModalEditedPlaylist from '../Modals/ModalEditedPlaylist/ModalEditedPlaylist';
 import Search from '../Search/Search';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const Aside = () => {
     const navigate = useNavigate();

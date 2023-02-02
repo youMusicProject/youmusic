@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { setPlayerAndFetch } from '../../helpers/functions/setPlayer';
 import { likedTrack } from '../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
-import { fetchEditSong } from '../../Api/putApi';
 import { setTracksList } from '../../redux/features/tracks/tracksSlice';
 
 

@@ -2,8 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react'
 import { Modal } from "react-bootstrap";
 import { IoIosArrowBack } from 'react-icons/io';
-import { useDispatch, useSelector } from 'react-redux';
-// import { uploadCloudinary } from '../../../helpers/functions/uploadCloudinary';
+import { useDispatch } from 'react-redux';
 import { AiOutlineEdit } from "react-icons/ai";
 import { fetchEditSong } from '../../../Api/putApi';
 import { setTracksList } from '../../../redux/features/tracks/tracksSlice';
@@ -12,7 +11,6 @@ const ModalEditedPlaylist = ({ track, tracks }) => {
     const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
-    const usersData = useSelector(state => state.userSlice);
     const { getAccessTokenSilently } = useAuth0();
     const serverUrl = process.env.REACT_APP_SERVER_URL;
 
