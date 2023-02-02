@@ -7,7 +7,6 @@ import { breakpoints_album, breakpoints_small } from "../helpers/functions/break
 import SearchPage from "./SearchPage";
 import { useSearchParams } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
-import Spinner from 'react-bootstrap/Spinner';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -17,9 +16,10 @@ const HomePage = () => {
   const albums = useSelector(state => state.albumSlice);
   const tracks = useSelector(state => state.trackSlice);
   const artists = useSelector(state => state.artistSlice);
-
+  // console.log(userData.userLogged._id);
   const publicAccessiblePlaylist = playlists.list.filter((playlist) => playlist.publicAccessible === "true")
-
+  const artistsWithoutMe = userData.userLogged ? artists.list.filter((artist) => artist.userId !== userData.userLogged._id) : artists.list
+    
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get("filter") ?? "";
   
@@ -123,10 +123,6 @@ const HomePage = () => {
   if (isLoading) {
     return (
       loader()
-
-      // <div className="grid-center mt-5">
-        // <Spinner animation="grow" variant="primary" />
-      // </div>
     )
   }
 
@@ -181,12 +177,12 @@ const HomePage = () => {
                   </div>
               }
 
-              <div className="mx-2 titleCards">
+                <div className="mx-2 titleCards">
                 <ArtistSlider
                   slidesPerView={2}
                   size='small'
                   img='img__small img__small--circle'
-                  array={artists.list}
+                  array={artistsWithoutMe}
                   title='Artist'
                   breakpoints={{
                     600: {
