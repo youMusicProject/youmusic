@@ -7,6 +7,7 @@ import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
+import { setUserLogged } from '../../../redux/features/user/userSlice';
 
 export const TopInfoArtist = ({ data }) => {
     const dispatch = useDispatch();
@@ -25,7 +26,6 @@ export const TopInfoArtist = ({ data }) => {
             const token = await getAccessTokenSilently()
             const validate = usersData.userLogged.follows.find((artist) => artist.name === data.name);
             if (!!validate) {
-                console.log("dejar de seguir");
                 // ID del usuario logeado (el que da unfollow)
                 // ID del artista
                 const response = await fetch(`${serverUrl}/api/user/unfollow`, {
@@ -41,8 +41,7 @@ export const TopInfoArtist = ({ data }) => {
                     },
                 });
                 const data = await response.json();
-                console.log(data);
-                //! HACER EL DISPATCH al user
+                dispatch(setUserLogged(data.user));
             } else {
                 const follow = {
                     _id: artist._id,
@@ -69,8 +68,7 @@ export const TopInfoArtist = ({ data }) => {
                     },
                 });
                 const data = await response.json();
-                //! HACER EL DISPATCH al user
-                console.log(data);
+                dispatch(setUserLogged(data.user));
             }
         } catch (error) {
             console.log(error);
@@ -94,7 +92,7 @@ export const TopInfoArtist = ({ data }) => {
                             {
                                 usersData.isLogged ? <button className='m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button' onClick={() => likedArtist(data, usersData, dispatch, getAccessTokenSilently, serverUrl)}>
                                     {
-                                        usersData.userLogged.liked_artist.find((artist) => artist._id === data._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
+                                        usersData.isLogged ?? usersData.userLogged.liked_artist.find((artist) => artist._id === data._id) ? <BsSuitHeartFill /> : <BsSuitHeart />
                                     }</button> : ""
                             }
                             {
