@@ -224,7 +224,7 @@ const HomePage = () => {
                 />
               </div>
               {
-                userData.userLogged ?
+                userData.userLogged && userData.userLogged.follows.length > 0 ?
                 <div className="mx-2 titleCards">
                   <ArtistSlider
                     slidesPerView={2}

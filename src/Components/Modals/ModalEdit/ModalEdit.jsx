@@ -30,7 +30,7 @@ export const ModalEdit = () => {
         e.preventDefault();
         try {
             const file = e.target.img.files;
-            const src = await uploadCloudinary(file, "youmusic_img");
+            const src = await uploadCloudinary(file, "youmusic_img", "image");
     
             const token = await getAccessTokenSilently();
             const editUser = {
@@ -41,7 +41,7 @@ export const ModalEdit = () => {
                     first_name: e.target.first_name.value,
                     last_name: e.target.last_name.value,
                     complete_name: `${e.target.first_name.value} ${e.target.last_name.value}`,
-                    profilePicture: src
+                    profilePicture: src ? src : user.userData.profilePicture
                 }
             }
             fetchEdit("user", serverUrl, editUser, token, dispatch, setUserEdit);
