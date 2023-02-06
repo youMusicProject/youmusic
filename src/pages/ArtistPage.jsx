@@ -21,8 +21,6 @@ export const ArtistPage = () => {
     //* Falta por hacer, necesitamos que primero carge el "artist y luego que mapee el genres"
     const [listGenreArtist, setlistGenreArtist] = useState([]);
     let similarSongs = listGenreArtist.flat();
-    // const generosArtista = artist.genres;
-    // artist.genres.map((genre) => listGenreArtist = [...listGenreArtist, tracks.list.filter((track) => track.genre === genre)]);
 
 
     useEffect(() => {
@@ -35,16 +33,8 @@ export const ArtistPage = () => {
             setalbum(albums.list.filter((album) => album.artist === artist.name));
         }
 
-        // !!artist ? artist.genres.map((genre) => {
-        //     setlistGenreArtist([...listGenreArtist, genre]);
-        // }) 
-        // : console.log("no esta cargado el artist");
     }, [artist]);
 
-    useEffect(() => {
-        // console.log(similarSongs);
-        // console.log(listGenreArtist);
-    })
     return (
         <>
             <TopInfoArtist data={!!artist ? artist : ""} />
@@ -123,8 +113,6 @@ export const ArtistPage = () => {
                 {
                     listGenreArtist.length > 0 && listGenreArtist.map((e) => {
                         if (e.length > 0) {
-                            // const capitalizeGenre = e[0].genre.charAt(0).toUpperCase() + e[0].genre.slice(1);
-
                             return (
                                 <div key={uuidv4()} className="mt-2">
                                     <Slider

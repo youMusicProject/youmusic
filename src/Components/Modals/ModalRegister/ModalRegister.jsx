@@ -1,6 +1,4 @@
 // redux
-import { useDispatch, useSelector } from 'react-redux';
-
 
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
