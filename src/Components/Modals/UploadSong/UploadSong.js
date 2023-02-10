@@ -1,9 +1,12 @@
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+import { setUserEdit } from '../../../redux/features/user/userSlice';
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { IoIosArrowBack } from "react-icons/io";
+import { BsThreeDots } from "react-icons/bs";
 import { useAuth0 } from '@auth0/auth0-react';
+import { fetchEdit } from '../../../Api/putApi';
 import { uploadCloudinary } from '../../../helpers/functions/uploadCloudinary';
 import { fetchAddTrack } from '../../../Api/postApi';
 
@@ -16,6 +19,7 @@ export const UploadSong = ({ artist }) => {
     const { getAccessTokenSilently } = useAuth0();
 
     const userData = useSelector(state => state.userSlice);
+    const user = userData.userLogged;
 
 
     function handleShow(v) {
@@ -27,6 +31,7 @@ export const UploadSong = ({ artist }) => {
         e.preventDefault();
         const file_img = e.target.img.files;
         const file_song = e.target.song.files;
+        // if(){}
         try {
             const src_img = await uploadCloudinary(file_img, "youmusic_img", "image");
             const src_song = await uploadCloudinary(file_song, "youmusic_song", "video");

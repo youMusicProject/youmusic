@@ -1,10 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { AiFillStar } from "react-icons/ai";
 import { SlUserFollow, SlUserUnfollow } from "react-icons/sl";
 import { BsFillPlayFill, BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import { setPlayer } from '../../../helpers/functions/setPlayer';
 import { likedArtist } from '../../../helpers/functions/likeTrack';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useParams } from 'react-router-dom';
 import { setUserLogged } from '../../../redux/features/user/userSlice';
 
 export const TopInfoArtist = ({ data }) => {
@@ -14,6 +16,8 @@ export const TopInfoArtist = ({ data }) => {
     const tracksArtist = tracks.list.filter((track) => track.artist === data.name);
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const { getAccessTokenSilently } = useAuth0();
+    const artists = useSelector(state => state.artistSlice);
+    const { id } = useParams();
 
     const followArtist = async (artist) => {
         // CREO QUE SERIA MAS FACIL SI METIESEEMOS AQUI DIRECTAMENTE LOS FOLLOWERS? EN VEZ DE ESTAR EN EL USUARIO PORQUE UN USUARIO NO DEBERIA DE TENER FOLLOWERS

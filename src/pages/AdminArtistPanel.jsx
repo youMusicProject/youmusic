@@ -1,4 +1,4 @@
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Table, Tabs } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 import { UploadSong } from '../Components/Modals/UploadSong/UploadSong';

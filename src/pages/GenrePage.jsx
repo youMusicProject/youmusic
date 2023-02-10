@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { BsFillPlayFill } from "react-icons/bs";
 import { setPlayer } from '../helpers/functions/setPlayer';
+import { v4 as uuidv4 } from 'uuid';
 import Slider from '../Components/Slider/Slider';
 import { breakpoints_small } from '../helpers/functions/breakpoint';
 import { TableSongs } from '../Components/TableSongs/TableSongs';
@@ -34,6 +35,8 @@ const GenrePage = () => {
                                             <p>Music</p>
                                         </div>
                                         <button className="m-t-10 mx-2 waves-effect waves-dark btn btn-dark btn-svg btn-md btn-rounded containerButton--songpage__button" data-abc="true" onClick={() => setPlayer(song_same_genre, dispatch, usersData)} ><BsFillPlayFill /></button>
+                                        {/* <button href="#" type="submit" className="btn btn-primary profile">Edit</button> */}
+                                        {/* <a className="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a> */}
                                     </div>
                                 </div>
                             </div>
